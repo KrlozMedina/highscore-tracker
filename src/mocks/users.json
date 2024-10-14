@@ -1,0 +1,82 @@
+[
+    {
+        "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        "name": "Leidy Santos",
+        "ussername": "lsantos",
+        "email": "leidy.santos@example.com",
+        "role": "admin",
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.adminToken123"
+    },
+    {
+        "id": "f7e8d9c0-b123-4567-890a-bcdef6789012",
+        "name": "Carlos Medina",
+        "ussername": "cmedina",
+        "email": "carlos.medina@example.com",
+        "role": "user",
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.userToken456"
+    },
+    {
+        "id": "34567890-abcd-1234-ef56-7890abcdef12",
+        "name": "Ana Pérez",
+        "ussername": "aperez",
+        "email": "ana.perez@example.com",
+        "role": "admin",
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.adminToken789"
+    },
+    {
+        "id": "90ab1234-cdef-5678-gh90-ijklmnopqrst",
+        "name": "Juan López",
+        "ussername": "jlopez",
+        "email": "juan.lopez@example.com",
+        "role": "user",
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.userToken101"
+    },
+    {
+        "id": "11223344-aabb-ccdd-eeff-998877665544",
+        "name": "María García",
+        "ussername": "mgarcia",
+        "email": "maria.garcia@example.com",
+        "role": "user",
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.userToken202"
+    },
+    {
+        "id": "55667788-99aa-bbcc-ddee-112233445566",
+        "name": "Pedro Martínez",
+        "ussername": "pmartinez",
+        "email": "pedro.martinez@example.com",
+        "role": "user",
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.userToken303"
+    },
+    {
+        "id": "33445566-7788-99aa-bbcc-ddeeff112233",
+        "name": "Laura Fernández",
+        "ussername": "lfernandez",
+        "email": "laura.fernandez@example.com",
+        "role": "admin",
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.adminToken404"
+    },
+    {
+        "id": "77889900-aabb-ccdd-eeff-334455667788",
+        "name": "David Gómez",
+        "ussername": "dgomez",
+        "email": "david.gomez@example.com",
+        "role": "user",
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.userToken505"
+    },
+    {
+        "id": "99887766-5544-3322-1100-aabbccddeeff",
+        "name": "Sofía Ruiz",
+        "ussername": "sruiz",
+        "email": "sofia.ruiz@example.com",
+        "role": "admin",
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.adminToken606"
+    },
+    {
+        "id": "12345678-90ab-cdef-1234-567890abcdef",
+        "name": "Luis Torres",
+        "ussername": "ltorres",
+        "email": "luis.torres@example.com",
+        "role": "user",
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.userToken707"
+    }
+]
