@@ -12,7 +12,7 @@ const withAuth = (WrappedComponent) => {
       if (session) {
         setIsAuthenticated(true);
       } else {
-        router.push("/login");
+        router.push("auth/login");
       }
     }, [router]);
     

@@ -1,6 +1,11 @@
 "use client";
-export default function PlayersList() {
+
+import withAuth from "gsm/hoc/with-auth";
+
+function PlayersList() {
     return (
         <p>Hello PlayersList!</p>
     );
 }
+
+export default withAuth(PlayersList);

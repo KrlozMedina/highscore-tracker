@@ -1,5 +1,5 @@
 export default function Leaderboard() {
     return (
-        <p>Hello Login!</p>
+        <p>Hello Leaderboard!</p>
     ); 
 }
