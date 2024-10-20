@@ -12,12 +12,14 @@ export default function PlayersList() {
         <Container>
             <Row>
                 <Col>
+                {
+                    isLoading ? 'Cargando ...' :
                     <ListGroup>
                         {data && data.length > 0 && data.map((item, index) => (
-                            <ListGroup.Item key={item.id}>{item.title}, precio {item.body}</ListGroup.Item>
-                            // console.log(item)
+                            <ListGroup.Item key={item.id}>{index+1}.{item.name}, email {item.email}</ListGroup.Item>
                         ))}
                     </ListGroup>
+                }
                 </Col>
             </Row>
         </Container>

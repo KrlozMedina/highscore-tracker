@@ -1,4 +1,4 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 
 export const usersApi = createApi({
@@ -10,6 +10,9 @@ export const usersApi = createApi({
         getUsers: builder.query({
             query: () => 'users/admin/'
         }),
+        getUser: builder.query({
+            query: (userId) => `users/profile/${userId}`
+        }),
         createUser: builder.mutation({
             query: (body) => ({
                 url: '/auth/register',
@@ -20,4 +23,4 @@ export const usersApi = createApi({
     })
 })
 
-export const { useGetUsersQuery, useCreateUserMutation } = usersApi;
+export const { useGetUsersQuery, useGetUserQuery, useCreateUserMutation } = usersApi;

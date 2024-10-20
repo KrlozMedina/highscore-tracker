@@ -6,7 +6,8 @@ import data from 'hst/mocks/users.json'
 
 export async function GET(req, res) {
   const userId = res.params.userId
-  return NextResponse.json(data)
+  console.log('GET User')
+  return NextResponse.json(data[1])
 }
 
 export async function PUT(req, res) {

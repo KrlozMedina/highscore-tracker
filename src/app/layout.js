@@ -1,4 +1,6 @@
 import localFont from "next/font/local";
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 import "./globals.css";
 import StoreProvider from "hst/store/provider";
 
