@@ -1,0 +1,83 @@
+[
+    {
+      "scoreId": "abcd1234-5678-ef90-gh12-ijkl34567890",
+      "userId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+      "game": "Space Invaders",
+      "score": 2500,
+      "createdAt": "2024-10-10T14:30:00Z",
+      "updatedAt": "2024-10-10T15:00:00Z"
+    },
+    {
+      "scoreId": "bcde2345-6789-f012-ij34-klmn45678901",
+      "userId": "f7e8d9c0-b123-4567-890a-bcdef6789012",
+      "game": "Pac-Man",
+      "score": 5000,
+      "createdAt": "2024-10-09T12:00:00Z",
+      "updatedAt": "2024-10-09T13:00:00Z"
+    },
+    {
+      "scoreId": "cdef3456-7890-1234-kl56-mnop56789012",
+      "userId": "34567890-abcd-1234-ef56-7890abcdef12",
+      "game": "Donkey Kong",
+      "score": 6200,
+      "createdAt": "2024-10-11T09:15:00Z",
+      "updatedAt": "2024-10-11T09:45:00Z"
+    },
+    {
+      "scoreId": "defg4567-8901-2345-lm67-nopq67890123",
+      "userId": "90ab1234-cdef-5678-gh90-ijklmnopqrst",
+      "game": "Galaga",
+      "score": 4300,
+      "createdAt": "2024-10-08T16:20:00Z",
+      "updatedAt": "2024-10-08T16:50:00Z"
+    },
+    {
+      "scoreId": "efgh5678-9012-3456-mn78-opqr78901234",
+      "userId": "11223344-aabb-ccdd-eeff-998877665544",
+      "game": "Frogger",
+      "score": 3850,
+      "createdAt": "2024-10-07T11:40:00Z",
+      "updatedAt": "2024-10-07T12:10:00Z"
+    },
+    {
+      "scoreId": "fghi6789-0123-4567-no89-pqrs89012345",
+      "userId": "55667788-99aa-bbcc-ddee-112233445566",
+      "game": "Super Mario Bros",
+      "score": 7800,
+      "createdAt": "2024-10-06T18:00:00Z",
+      "updatedAt": "2024-10-06T18:30:00Z"
+    },
+    {
+      "scoreId": "ghij7890-1234-5678-op90-rstu90123456",
+      "userId": "33445566-7788-99aa-bbcc-ddeeff112233",
+      "game": "Tetris",
+      "score": 9250,
+      "createdAt": "2024-10-05T14:45:00Z",
+      "updatedAt": "2024-10-05T15:15:00Z"
+    },
+    {
+      "scoreId": "hijk8901-2345-6789-pq01-stuv01234567",
+      "userId": "77889900-aabb-ccdd-eeff-334455667788",
+      "game": "Street Fighter",
+      "score": 6700,
+      "createdAt": "2024-10-04T10:10:00Z",
+      "updatedAt": "2024-10-04T10:40:00Z"
+    },
+    {
+      "scoreId": "ijkl9012-3456-7890-rs12-tuvw12345678",
+      "userId": "99887766-5544-3322-1100-aabbccddeeff",
+      "game": "Mortal Kombat",
+      "score": 8900,
+      "createdAt": "2024-10-03T09:30:00Z",
+      "updatedAt": "2024-10-03T10:00:00Z"
+    },
+    {
+      "scoreId": "jklm0123-4567-8901-tu23-uvwx23456789",
+      "userId": "12345678-90ab-cdef-1234-567890abcdef",
+      "game": "Sonic the Hedgehog",
+      "score": 7100,
+      "createdAt": "2024-10-02T13:25:00Z",
+      "updatedAt": "2024-10-02T13:55:00Z"
+    }
+  ]
+  

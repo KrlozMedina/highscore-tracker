@@ -1,7 +1,0 @@
-export class User {
-    id: string;
-    name: string;
-    username: string;
-    token: string;
-    email: string;
-}
