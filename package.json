@@ -1,22 +1,14 @@
 {
-  "name": "gamescoremanager",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
-  },
-  "dependencies": {
-    "bootstrap": "^5.3.3",
-    "next": "14.2.15",
-    "react": "^18",
-    "react-bootstrap": "^2.10.5",
-    "react-dom": "^18"
-  },
-  "devDependencies": {
-    "eslint": "^8",
-    "eslint-config-next": "14.2.15"
-  }
+    "name": "proyecto",
+    "private": true,
+    "workspaces": [
+        "packages/frontend",
+        "packages/backend"
+    ],
+    "scripts": {
+        "start:frontend": "pnpm --filter frontend start",
+        "start:backend": "pnpm --filter backend start",
+        "start": "pnpm run -r start",
+        "dev": "pnpm run -r dev"
+    }
 }

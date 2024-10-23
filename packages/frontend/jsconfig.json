@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "paths": {
-      "gsm/*": ["./src/*"]
+      "hst/*": ["./src/*"]
     }
   }
 }

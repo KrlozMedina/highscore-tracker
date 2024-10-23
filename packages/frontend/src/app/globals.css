@@ -40,3 +40,7 @@ a {
     color-scheme: dark;
   }
 }
+
+.max-width{
+  max-width: 350px;
+}

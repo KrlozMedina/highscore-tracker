@@ -13,6 +13,7 @@
   - [Backend](#backend)
   - [Frontend](#frontend)
 - [Diagrama de la Base de Datos](#diagrama-de-la-base-de-datos)
+- [Workspaces](#workspaces)
 - [Fases del Proyecto](#fases-del-proyecto)
 - [Conclusión](#conclusión)
 - [Documentación de Origen](#documentación-de-origen)
@@ -52,49 +53,130 @@ El proyecto **HighScore Tracker** es una aplicación web fullstack que permite g
 
 ## Tecnologías a Utilizar
 
-- **Frontend**:
-  - Next.js (React.js)
-  - React-Bootstrap
-  - Redux Toolkit
+### Frontend:
 
-- **Backend**:
-  - Nest.JS
-  - MongoDB con Mongoose
-  - PostgreSQL
-  - JWT (JSON Web Token)
-  - bcrypt
+- Next.js (React.js)
+- React-Bootstrap
+- Redux Toolkit
+- RTK Query
 
-- **Integraciones Opcionales**:
-  - OAuth2
-  - Socket.io (Opcional)
+### Backend:
+
+- Nest.JS
+- MongoDB con Mongoose
+- PostgreSQL
+- JWT (JSON Web Token)
+- bcrypt
+
+### Integraciones Opcionales:
+
+- OAuth2
+- Socket.io (Opcional)
 
 ## Estructura del Proyecto
 
 ### Backend
 
-- **Rutas de Usuario**:
-  - POST /api/v1/auth/register
-  - POST /api/v1/auth/login
-  - GET /api/v1/users/profile/:userId
-  - GET /api/v1/users/scores/:userId
-  - PUT /api/v1/users/profile/:userId
+El backend del proyecto se construye con NestJS para manejar las API y la lógica de negocio. Se utiliza MongoDB para gestionar la base de datos de puntuaciones y PostgreSQL para la autenticación y gestión de usuarios.
 
-- **Rutas de Puntuaciones**:
-  - POST /api/v1/scores/:userId
-  - GET /api/v1/scores/leaderboard
+#### **Rutas de Usuario**:
 
-- **Rutas de Administración**:
-  - GET /api/v1/users/admin
-  - PATCH /api/v1/users/admin/:userId
-  - DELETE /api/v1/users/admin/:userId
-  - DELETE /api/v1/users/admin/scores/:userId
+- **POST** `/api/v1/auth/register`: Registro de nuevos usuarios.
+- **POST** `/api/v1/auth/login`: Inicio de sesión de usuarios.
+- **GET** `/api/v1/users/profile/:userId`: Obtiene el perfil de un usuario.
+- **GET** `/api/v1/users/scores/:userId`: Obtiene las puntuaciones de un usuario.
+- **PUT** `/api/v1/users/profile/:userId`: Actualiza el perfil de un usuario.
+
+#### **Rutas de Puntuaciones**:
+
+- **POST** `/api/v1/scores/:userId`: Añade una puntuación nueva para un usuario.
+- **GET** `/api/v1/scores/leaderboard`: Lista las puntuaciones más altas en el ranking.
+
+#### **Rutas de Administración**:
+
+- **GET** `/api/v1/users/admin`: Obtiene todos los usuarios con permisos de administrador.
+- **PATCH** `/api/v1/users/admin/:userId`: Actualiza los permisos de un usuario.
+- **DELETE** `/api/v1/users/admin/:userId`: Elimina un usuario.
+- **DELETE** `/api/v1/users/admin/scores/:userId`: Elimina todas las puntuaciones de un usuario.
 
 ### Frontend
 
-- **Pantalla de Registro**: Formulario de registro e inicio de sesión.
-- **Pantalla de Perfil del Jugador**: Visualización de puntuaciones y estadísticas personales.
-- **Pantalla de Ranking**: Tabla de clasificación con los jugadores mejor puntuados.
-- **Panel de Administración**: Gestión de usuarios y puntuaciones.
+La interfaz de usuario se construye con **Next.js** y se utiliza **Redux Toolkit** para gestionar el estado global de la aplicación. Además, se usa **React-Bootstrap** para diseñar la UI.
+
+#### **Pantallas**:
+
+- **Login**: Pantalla de inicio de sesión y registro de usuarios.
+- **Perfil del Jugador**: Permite al jugador ver y gestionar sus puntuaciones.
+- **Ranking Global**: Tabla de clasificación de jugadores con las puntuaciones más altas.
+- **Panel de Administración**: Gestión de usuarios y puntuaciones por parte del administrador.
+
+## Diagrama de la Base de Datos
+
+### **Base de datos de Usuarios (PostgreSQL)**:
+
+- `userId`: Identificador único.
+- `username`: Nombre de usuario.
+- `name`: Nombre del jugador.
+- `email`: Correo electrónico.
+- `password`: Contraseña hash.
+- `role`: Rol del usuario (admin o jugador).
+- `status`: Estado del usuario (activo/inactivo).
+- `avatar`: Imagen de perfil del jugador.
+- `createdAt`: Fecha de creación.
+- `updatedAt`: Fecha de actualización.
+
+### **Colección de Puntuaciones (MongoDB)**:
+
+- `scoreId`: Identificador único de la puntuación.
+- `userId`: ID del jugador que hizo la puntuación.
+- `game`: Nombre del juego.
+- `score`: Valor de la puntuación.
+- `createdAt`: Fecha en que se creó la puntuación.
+- `updatedAt`: Fecha de actualización de la puntuación.
+
+## Workspaces
+
+El proyecto está configurado como un **monorepo** usando **pnpm workspaces** para gestionar tanto el frontend como el backend en un solo repositorio. Los workspaces permiten compartir dependencias y scripts entre ambas partes del proyecto.
+
+### Configuración de Workspaces:
+
+1. **Root `package.json`**:
+
+```json
+{
+  "name": "highscore-tracker",
+  "private": true,
+  "workspaces": [
+    "packages/frontend",
+    "packages/backend"
+  ],
+  "scripts": {
+    "start": "concurrently \"pnpm --filter frontend dev\" \"pnpm --filter backend start\""
+  }
+}
+```
+
+2. **Frontend (packages/frontend):**
+
+```json
+{
+  "name": "frontend",
+  "scripts": {
+    "dev": "next dev"
+  }
+}
+```
+
+3. **Backend (packages/backend):**
+
+```json
+{
+  "name": "backend",
+  "scripts": {
+    "start": "nest start"
+  }
+}
+```
 
 ## Diagrama de la Base de Datos
 
@@ -106,15 +188,16 @@ El proyecto **HighScore Tracker** es una aplicación web fullstack que permite g
 
 ## Fases del Proyecto
 
-1. **Configuración del Proyecto**: Crear repositorio y configurar el entorno.
-2. **Desarrollo del Backend**: Crear modelos, rutas, y autenticación.
-3. **Desarrollo del Frontend**: Crear componentes, implementar estado global, y conectar con la API.
-4. **Pruebas y Deploy**: Realizar pruebas y desplegar en plataformas adecuadas.
-5. **Extensiones Opcionales**: Integrar WebSockets y mejorar diseño.
+1. **Configuración del Proyecto**: Crear repositorio, configurar entornos de desarrollo y workspaces.
+2. **Desarrollo del Backend**: Crear modelos de datos, rutas API y lógica de autenticación.
+3. **Desarrollo del Frontend**: Implementar componentes, conectarlos al estado global con Redux Toolkit y consumir las API.
+4. **Pruebas y Deploy**: Realizar pruebas, corregir errores, y desplegar el proyecto.
+5. **Extensiones Opcionales**: Integrar WebSockets y optimizar la experiencia de usuario.
+
 
 ## Conclusión
 
-Este proyecto abarca el ciclo completo de una aplicación fullstack en el contexto de un videojuego, permitiendo al campista aprender tanto el desarrollo del frontend como el backend, manejar autenticación segura, y trabajar con bases de datos NoSQL como MongoDB y SQL como PostgreSQL.
+El proyecto HighScore Tracker ofrece un ejemplo práctico de una aplicación fullstack moderna, integrando un backend con NestJS y un frontend con Next.js, permitiendo a los desarrolladores comprender el flujo completo de datos y la interacción entre sistemas complejos en tiempo real.
 
 ## Documentación de Origen
 
