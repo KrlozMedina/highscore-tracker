@@ -6,5 +6,5 @@ import data from 'hst/mocks/scores.json'
 export async function POST(req, res) {
     const userId = res.params.userId
     console.log(userId)
-    return NextResponse.json(data, {status:201})
+    return NextResponse.json(data[1], {status:201})
 }

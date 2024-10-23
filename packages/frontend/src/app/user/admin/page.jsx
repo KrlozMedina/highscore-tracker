@@ -17,6 +17,7 @@ export default function PlayersList() {
                     <ListGroup>
                         {data && data.length > 0 && data.map((item, index) => (
                             <ListGroup.Item key={item.id}>{index+1}.{item.name}, email {item.email}</ListGroup.Item>
+                            // console.log('data', item)
                         ))}
                     </ListGroup>
                 }

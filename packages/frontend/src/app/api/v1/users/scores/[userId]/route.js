@@ -5,5 +5,5 @@ import data from 'hst/mocks/scores.json'
 
 export async function GET(req, res) {
     const userId = res.params.userId
-    return NextResponse.json(data)
+    return NextResponse.json(data[1])
 }
