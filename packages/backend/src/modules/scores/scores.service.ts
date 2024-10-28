@@ -1,9 +1,9 @@
 import { faker } from '@faker-js/faker';
 import { Injectable } from '@nestjs/common';
 import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto';
-import { Paginator } from 'src/models/paginator';
-import { Score } from 'src/models/score';
 import { v4 as uuidv4 } from 'uuid';
+import { Score } from './dto/score';
+import { Paginator } from './dto/paginator';
 
 @Injectable()
 export class ScoresService {
