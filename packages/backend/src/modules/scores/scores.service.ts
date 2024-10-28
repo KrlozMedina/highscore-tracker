@@ -44,6 +44,24 @@ export class ScoresService {
         }   
     }
 
+    getAllScoresByUserId(paginationQuery: PaginationQueryDto): Paginator {
+        const { limit = 10, page = 1 } = paginationQuery;
+        const start = (page - 1) * limit;
+        const end = start + limit;
+    
+        const data = this.scores.slice(start, end);
+        const total = this.scores.length;
+        const totalPages = Math.ceil(total / limit);
+
+        return <Paginator> {
+         data,
+         total,
+         page,
+         limit,
+         totalPages,
+        }   
+    }
+
     createScore(createScoreDto: CreateScoreDto): Score{
         const newScore = {id: uuidv4(), ...createScoreDto};
         this.scores.push(newScore);

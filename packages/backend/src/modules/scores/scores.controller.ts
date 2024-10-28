@@ -15,7 +15,7 @@ export class ScoresController {
         return this.scoreService.getAllScores(paginationQuery);
     }
 
-    @Post()
+    @Post(':id')
     createScore(@Body() createScoreDto: CreateScoreDto): Score{
         return this.scoreService.createScore(createScoreDto);
     }
