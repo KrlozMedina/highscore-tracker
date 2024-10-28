@@ -4,6 +4,7 @@ import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto';
 import { v4 as uuidv4 } from 'uuid';
 import { Score } from './dto/score';
 import { Paginator } from './dto/paginator';
+import { CreateScoreDto, UpdateScoreDto } from './dto/create-score.dto';
 
 @Injectable()
 export class ScoresService {
@@ -43,15 +44,19 @@ export class ScoresService {
         }   
     }
 
-    getScoreById(id: string): Score {
-        return this.scores.find(score => score.id === id);
+    createScore(createScoreDto: CreateScoreDto): Score{
+        const newScore = {id: uuidv4(), ...createScoreDto};
+        this.scores.push(newScore);
+        return newScore;
     }
 
-    updateScoreById(id: string, updateData: Score) {
-        const score = this.getScoreById(id);
-        if (score) {
-          Object.assign(score, updateData);
+    updateScore(id: string, updateScoreDto: UpdateScoreDto): Score {
+        const userIndex = this.scores.findIndex(user => user.id === id);
+        if (userIndex === -1) {
+            return null
         }
+        this.scores[userIndex] = {...this.scores[userIndex], ...updateScoreDto};
+        return this.scores[userIndex];
     }
 
     deleteScoreById(id: string) {

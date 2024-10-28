@@ -1,6 +1,8 @@
-import { Controller, Get, Query} from '@nestjs/common';
-import { Score, ScoresService } from './scores.service';
+import { Controller, Get, Post, Query, Body} from '@nestjs/common';
+import { ScoresService } from './scores.service';
 import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto';
+import { CreateScoreDto } from './dto/create-score.dto';
+import { Score } from './dto/score';
 
 @Controller('scores/leaderboard')
 export class ScoresController {
@@ -11,5 +13,10 @@ export class ScoresController {
     @Get()
     getScores(@Query() paginationQuery: PaginationQueryDto) {
         return this.scoreService.getAllScores(paginationQuery);
+    }
+
+    @Post()
+    createScore(@Body() createScoreDto: CreateScoreDto): Score{
+        return this.scoreService.createScore(createScoreDto);
     }
 }
