@@ -7,7 +7,7 @@ export const usersApi = createApi({
     }),
     endpoints: (builder) => ({
         getUsers: builder.query({
-            query: () => 'users/admin/'
+            query: (pag) => `users/admin?page=${pag.page}&limit=${pag.limit}`
         }),
         getUser: builder.query({
             query: (userId) => `users/profile/${userId}`
@@ -18,8 +18,15 @@ export const usersApi = createApi({
                 method: 'POST',
                 body,
             })
+        }),
+        updateUser: builder.mutation({
+            query: (body) => ({
+                url: `users/profile/${body.id}`,
+                method: 'PUT',
+                body,
+            })
         })
     })
 })
 
-export const { useGetUsersQuery, useGetUserQuery, useCreateUserMutation } = usersApi;
+export const { useGetUsersQuery, useGetUserQuery, useCreateUserMutation, useUpdateUserMutation } = usersApi;

@@ -3,10 +3,23 @@ import { faker } from '@faker-js/faker';
 import { v4 as uuidv4 } from 'uuid';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto';
 export interface User {
     id: string;
     email: string;
     name: string;
+    username: string;
+    role: string;
+    avatar: string;
+    status: string;
+}
+
+export interface Paginator {
+    data: [];
+    total: number;
+    page: number;
+    limit: number;
+    totalPages: number;
 }
 
 @Injectable()
@@ -22,13 +35,31 @@ export class UsersService {
             this.users.push({
                 id: uuidv4(),
                 name: faker.company.name(),
-                email: faker.internet.email()
+                email: faker.internet.email(),
+                username: faker.internet.userName(),
+                role: 'Player',
+                avatar: faker.image.avatar(),
+                status: 'Active'
             })
         }
     }
 
-    getAllUsers(): User[] {
-        return this.users;
+    getAllUsers(paginationQuery: PaginationQueryDto): Paginator {
+        const { page = 1, limit = 10 } = paginationQuery;        
+        const start = (page - 1) * limit;
+        const end = Number(start) + Number(limit);
+
+        const data = this.users.slice(start, end);
+        const total = this.users.length;
+        const totalPages = Math.ceil(total / limit);
+
+        return <Paginator>{
+            data,
+            total,
+            page,
+            limit,
+            totalPages,
+        }
     }
 
     getUserById(id: string): User {
@@ -36,7 +67,7 @@ export class UsersService {
     }
 
     createUser(createUserDto: CreateUserDto): User {
-        const newUser = {id: uuidv4(), ...createUserDto};
+        const newUser = {id: uuidv4(), role: 'Player', status: 'Active', ...createUserDto};
         this.users.push(newUser);
         return newUser;
     }
