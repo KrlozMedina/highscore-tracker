@@ -5,6 +5,7 @@ import { useGetLeaderboardQuery } from "hst/store/services/scores.api";
 
 export default function Leaderboard() {
     const { data, error, isLoading } = useGetLeaderboardQuery();
+
     return (
         <Container>
             <Row>
@@ -12,7 +13,7 @@ export default function Leaderboard() {
                 {
                     isLoading ? 'Cargando ...' :
                     <ListGroup>
-                        {data && data.length > 0 && data.map((item, index) => (
+                        {data.data && data.data.length > 0 && data.data.map((item, index) => (
                             <ListGroup.Item key={item.scoreId}>{index+1}.{item.game}, score {item.score}</ListGroup.Item>
                         ))}
                     </ListGroup>

@@ -12,5 +12,4 @@ export class PaginationQueryDto {
     @IsPositive()
     @Type(() => Number)
     page?: number;
-
 }
