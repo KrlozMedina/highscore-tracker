@@ -1,4 +1,4 @@
-export interface Score {
+export interface ScoreDto {
     id: string;
     username: string;
     game: string;

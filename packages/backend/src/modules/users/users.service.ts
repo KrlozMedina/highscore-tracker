@@ -4,6 +4,9 @@ import { v4 as uuidv4 } from 'uuid';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto';
+import { PaginatorDto } from '../scores/dto/paginator.dto';
+import { ScoreDto } from '../scores/dto/score.dto';
+import { PaginatorScoreDto } from '../scores/dto/paginatorScore.dto';
 export interface User {
     id: string;
     email: string;
@@ -29,6 +32,7 @@ export class UsersService {
     }
 
     private users: User[] = [];
+    private scores: ScoreDto[] = [];
 
     private generateMockData() {
         for (let i = 0; i < 100; i++) {
@@ -83,5 +87,23 @@ export class UsersService {
     
     deleteUser(id: string): void {
         this.users = this.users.filter(user => user.id !== id)
+    }
+
+    getScoresByUser(paginationQuery: PaginationQueryDto): PaginatorDto {
+        const { limit = 10, page = 1 } = paginationQuery;
+        const start = (page - 1) * limit;
+        const end = start + limit;
+    
+        const data = this.scores.slice(start, end);
+        const total = this.scores.length;
+        const totalPages = Math.ceil(total / limit);
+
+        return <PaginatorDto> {
+         data,
+         total,
+         page,
+         limit,
+         totalPages,
+        }   
     }
 }

@@ -4,13 +4,18 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto';
 
-@Controller('users/admin')
+@Controller('users')
 export class UsersController {
     constructor(private readonly usersService: UsersService) {}
 
-    @Get()
+    @Get('/admin')
     getAllUsers(@Query() paginationQuery: PaginationQueryDto) {
         return this.usersService.getAllUsers(paginationQuery);
+    }
+
+    @Get('/scores/:id')
+    getScoresByUserID(@Query() paginationQuery: PaginationQueryDto) {
+        return this.usersService.getScoresByUser(paginationQuery);
     }
 
     @Get(':id')

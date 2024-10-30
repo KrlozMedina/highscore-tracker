@@ -2,9 +2,9 @@ import { faker } from '@faker-js/faker';
 import { Injectable } from '@nestjs/common';
 import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto';
 import { v4 as uuidv4 } from 'uuid';
-import { Score } from './dto/score';
-import { Paginator } from './dto/paginator';
 import { CreateScoreDto, UpdateScoreDto } from './dto/create-score.dto';
+import { ScoreDto } from './dto/score.dto';
+import { PaginatorDto } from './dto/paginator.dto';
 
 @Injectable()
 export class ScoresService {
@@ -13,7 +13,7 @@ export class ScoresService {
         this.generateMockData();
     }
 
-    private scores: Score[] = [];
+    private scores: ScoreDto[] = [];
 
     private generateMockData() {
         for (let i = 0; i < 100; i++) {
@@ -26,7 +26,7 @@ export class ScoresService {
         }
     }
 
-    getAllScores(paginationQuery: PaginationQueryDto): Paginator {
+    getAllScores(paginationQuery: PaginationQueryDto): PaginatorDto {
         const { limit = 10, page = 1 } = paginationQuery;
         const start = (page - 1) * limit;
         const end = start + limit;
@@ -35,7 +35,7 @@ export class ScoresService {
         const total = this.scores.length;
         const totalPages = Math.ceil(total / limit);
 
-        return <Paginator> {
+        return <PaginatorDto> {
          data,
          total,
          page,
@@ -44,7 +44,7 @@ export class ScoresService {
         }   
     }
 
-    getAllScoresByUserId(paginationQuery: PaginationQueryDto): Paginator {
+    getAllScoresByUserId(paginationQuery: PaginationQueryDto): PaginatorDto {
         const { limit = 10, page = 1 } = paginationQuery;
         const start = (page - 1) * limit;
         const end = start + limit;
@@ -53,7 +53,7 @@ export class ScoresService {
         const total = this.scores.length;
         const totalPages = Math.ceil(total / limit);
 
-        return <Paginator> {
+        return <PaginatorDto> {
          data,
          total,
          page,
@@ -62,13 +62,13 @@ export class ScoresService {
         }   
     }
 
-    createScore(createScoreDto: CreateScoreDto): Score{
+    createScore(createScoreDto: CreateScoreDto): ScoreDto{
         const newScore = {id: uuidv4(), ...createScoreDto};
         this.scores.push(newScore);
         return newScore;
     }
 
-    updateScore(id: string, updateScoreDto: UpdateScoreDto): Score {
+    updateScore(id: string, updateScoreDto: UpdateScoreDto): ScoreDto {
         const userIndex = this.scores.findIndex(user => user.id === id);
         if (userIndex === -1) {
             return null

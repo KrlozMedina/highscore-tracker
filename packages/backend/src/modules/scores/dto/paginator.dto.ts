@@ -1,4 +1,4 @@
-export interface Paginator {
+export interface PaginatorDto {
     data: [];
     total: number;
     page: number;
