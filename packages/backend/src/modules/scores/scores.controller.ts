@@ -2,13 +2,15 @@ import { Controller, Get, Post, Query, Body, Param, HttpCode, Delete} from '@nes
 import { ScoresService, Score } from './scores.service';
 import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto';
 import { CreateScoreDto } from './dto/create-score.dto';
-// import { Score } from './dto/score';
+import { ScoreDto } from './dto/score.dto';
 
-@Controller('scores/leaderboard')
-export class LeaderBoardController {
-    constructor(private scoreService: ScoresService){}
+@Controller('scores')
+export class ScoresController {
+    constructor(
+        private scoreService: ScoresService
+    ){}
 
-    @Get()
+    @Get('/leaderboard')
     getScores(@Query() paginationQuery: PaginationQueryDto) {
         return this.scoreService.getAllScores(paginationQuery);
     }
@@ -18,9 +20,9 @@ export class LeaderBoardController {
 export class ScoreController {
     constructor (private readonly scoreService: ScoresService) {}
 
-    @Post(':id')
-    createScore(@Param('id') id: string, @Body() createScoreDto: CreateScoreDto): Score {
-        return this.scoreService.createScore(id, createScoreDto);
+    @Post('/:id')
+    createScore(@Body() createScoreDto: CreateScoreDto): ScoreDto{
+        return this.scoreService.createScore(createScoreDto);
     }
 }
 

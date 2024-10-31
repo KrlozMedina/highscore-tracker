@@ -219,7 +219,7 @@ paths:
       security:
         - bearerAuth: []
       tags:
-        - Scores
+        - Users
       description: Get scores of user by user ID
       operationId: scores
       parameters:
