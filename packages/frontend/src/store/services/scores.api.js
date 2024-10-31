@@ -6,26 +6,29 @@ export const scoresApi = createApi({
         baseUrl: 'http://localhost:3001/api/v1/'
     }),
     endpoints: (builder) => ({
-        getScores: builder.query({
-            query: (userId) => `users/scores/${userId}`
+        getScoreById: builder.query({
+            query: (userId) => `users/admin/scores/${userId}`
         }),
-        getLeaderboard: builder.query({
+        getLeaderBoard: builder.query({
             query: () => `scores/leaderboard`
         }),
         createScore: builder.mutation({
-            query: (userId, body) => ({
-                url: `scores/${userId}`,
+            query: (body) => ({
+                url: `scores/${body.id}`,
                 method: 'POST',
                 body,
             })
         }),
         deleteScore: builder.mutation({
-            query: () => ({
+            query: (scoreId) => ({
                 url: `users/admin/scores/${scoreId}`,
                 method: 'DELETE'
             })
+        }),
+        getAllScores: builder.query({
+            query: (pag) => `scores/leaderboard?page=${pag.page}&limit=${pag.limit}`
         })
     })
 })
 
-export const {useGetScoresQuery, useGetLeaderboardQuery, useCreateScoreMutation, useDeleteScoreMutation} = scoresApi;
+export const {useGetAllScoresQuery, useGetScoreByIdQuery, useGetLeaderBoardQuery, useCreateScoreMutation, useDeleteScoreMutation} = scoresApi;

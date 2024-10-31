@@ -2,16 +2,17 @@
 
 import { useCreateScoreMutation } from 'hst/store/services/scores.api';
 import InputField from 'hst/components/atoms/InputField';
-import Button from 'hst/components/atoms/Button';
+import { Button } from 'react-bootstrap';
 import {useState} from 'react';
 
-const RegisterScore = () => {
+const RegisterScore = (params) => {
     const [score, setScore] = useState(0);
-    const [createScore, {isUpdating}] = useCreateScoreMutation();
+    const [createScore, { isUpdating }] = useCreateScoreMutation();
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        createScore({score})
+        var scoreInt = parseInt(score)
+        createScore({ id: params.params.userId, scoreInt})
         .then(data => console.log(data))
         .catch(err => console.error(err))
       };
@@ -28,9 +29,11 @@ const RegisterScore = () => {
               placeholder="Ingresa puntuación"
             />
             <Button
-              text="Registrar"
               type='submit'
-            />
+              className='btn-primary'
+            >
+              Registrar
+            </Button>
           </form>
         </div>
       );
