@@ -4,13 +4,15 @@ import withAuth from "hst/hoc/with-auth";
 import { Container, Table, Button, Spinner, Form, Pagination, Alert } from "react-bootstrap";
 import { useGetUsersQuery, useUpdateUserMutation } from "hst/store/services/users.api";
 import { useEffect, useState } from "react";
+import Loading from "hst/components/atoms/Loading";
+import { Danger, Warning } from "hst/components/atoms/Message";
+import LimitChange from "hst/components/atoms/LimitChange";
+import Pag from "hst/components/atoms/Pagination";
 
-export default function PlayersList(params) {
+export default function PlayersList() {
     const [page, setPage] = useState(1);
     const [limit, setLimit] = useState(10)
-    // const [totalUsers, setTotalUsers] = useState(0)
     const [totalPages, setTotalPages] = useState(0)
-
     const { data, error, isLoading } = useGetUsersQuery({page, limit});
     const [updateUser, { isUpdating }] = useUpdateUserMutation();
 
@@ -42,75 +44,54 @@ export default function PlayersList(params) {
 
     return (
         <Container className="mt-5">
+            <h2>Lista de Usuarios</h2>
             {
-                isLoading 
-                ? 
-                    <div className="text-center">
-                        <Spinner animation="border" />
-                        <p>Cargando usuarios...</p>
-                    </div> 
-                :
-                    <div>
-                        {error && <Alert variant="danger">{error}</Alert>}
-                        {!isLoading && data.length === 0 && <Alert variant="warning">No hay usuarios para mostrar.</Alert>}
-                        
-                        <h2>Lista de Usuarios</h2>
-
-
-                    <Form.Group controlId="limitSelect" className="mb-3">
-                        <Form.Label>Usuarios por página:</Form.Label>
-                        <Form.Control as="select" value={limit} onChange={handleLimitChange}>
-                        <option value="5">5</option>
-                        <option value="10">10</option>
-                        <option value="15">15</option>
-                        <option value="20">20</option>
-                        </Form.Control>
-                    </Form.Group>
-
+                error !== undefined ? <Danger error={error} /> : 
+                isLoading ? <Loading message='Cargando usuarios' /> :
+                data.total === 0 ? <Warning message='No hay usuarios para mostrar.' /> :
+                <div>
+                    <LimitChange limit={limit} onChange={handleLimitChange} />
                     <Table striped bordered hover>
                         <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Avatar</th>
-                            <th>Name</th>
-                            <th>Usuario</th>
-                            <th>Email</th>
-                            <th>Rol</th>
-                            <th>Acciones</th>
-                        </tr>
+                            <tr>
+                                <th>#</th>
+                                <th>Avatar</th>
+                                <th>Name</th>
+                                <th>Usuario</th>
+                                <th>Email</th>
+                                <th>Rol</th>
+                                <th>Acciones</th>
+                            </tr>
                         </thead>
                         <tbody>
-                        {data.data.map((user, index) => (
-                            <tr key={user.id}>
-                            <td>{index + 1 + (page * limit - limit)}</td>
-                            <td><img src={user.avatar} alt="Avatar" width="40" height="40" /></td>
-                            <td>{user.name}</td>
-                            <td>{user.username}</td>
-                            <td>{user.email}</td>
-                            <td>{user.role}</td>
-                            <td>
-                                {/* <Button variant="danger" href={`/users/admin/${user.id}`}>Ver Detalles</Button> */}
-                                <Button 
-                                variant={user.status==='Active' ? "warning" : "success"}
-                                href="/users/admin"
-                                onClick={() => handleToggleUserStatus(user.id, user.status)}>
-                                    {
-                                        user.status==='Active' ? "Desactivar" : "Activar"
-                                    }
-                                </Button>{' '}
-                                {user.status !== 'Lock' && <Button href="/users/admin" variant="danger" onClick={() => handleDeleteUser(user.id, user.status)}>Eliminar</Button>}
-                            </td>
-                            </tr>
-                        ))}
+                            {data.data.map((user, index) => (
+                                <tr key={user.id}>
+                                    <td>{index + 1 + (page * limit - limit)}</td>
+                                    <td><img src={user.avatar} alt="Avatar" width="40" height="40" /></td>
+                                    <td>{user.name}</td>
+                                    <td>{user.username}</td>
+                                    <td>{user.email}</td>
+                                    <td>{user.role}</td>
+                                    <td>
+                                        <Button 
+                                        variant={user.status==='Active' ? "warning" : "success"}
+                                        href="/users/admin"
+                                        onClick={() => handleToggleUserStatus(user.id, user.status)}>
+                                            {user.status==='Active' ? "Desactivar" : "Activar"}
+                                        </Button>
+                                        {user.status !== 'Lock' && 
+                                        <Button href="/users/admin" 
+                                        variant="danger" 
+                                        onClick={() => handleDeleteUser(user.id, user.status)}>
+                                            Eliminar
+                                        </Button>}
+                                    </td>
+                                </tr>
+                            ))}
                         </tbody>
                     </Table>
-
-                    <Pagination className="justify-content-center">
-                        <Pagination.Prev onClick={() => handlePageChange(page - 1)} disabled={page === 1} />
-                        <Pagination.Item active>{page}/{totalPages}</Pagination.Item>
-                        <Pagination.Next onClick={() => handlePageChange(page + 1)} />
-                    </Pagination>
-                    </div>
+                    <Pag onClick={handlePageChange} page={page} totalPages={totalPages} />
+                </div>
             }
         </Container>
     );
