@@ -2,8 +2,8 @@
 
 import React, {useState} from 'react';
 import InputField from 'hst/components/atoms/InputField';
-import Button from 'hst/components/atoms/Button';
 import { useCreateUserMutation } from 'hst/store/services/users.api';
+import { Button } from 'react-bootstrap';
 
 const RegisterPage = () => {
   const [username, setUsername] = useState('');
@@ -52,9 +52,8 @@ const RegisterPage = () => {
           placeholder="Ingresa tu contraseña"
         />
         <Button
-          text="Registrarse"
           type='submit'
-        />
+        >Registrar</Button>
       </form>
       <p className="mt-3">
         ¿Ya tienes una cuenta? <a href="/auth/login">Inicia sesión aquí</a>

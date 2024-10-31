@@ -1,5 +1,7 @@
 "use client";
 
+import Loading from "hst/components/atoms/Loading";
+import { Danger, Warning } from "hst/components/atoms/Message";
 import withAuth from "hst/hoc/with-auth";
 import { useGetUserQuery, useUpdateUserMutation } from "hst/store/services/users.api";
 import { useEffect, useState } from "react";
@@ -16,7 +18,7 @@ export default function UserDetail({params}){
     const [email, setEmail] = useState('');
 
     useEffect(() => {
-        if (!isLoading) {
+        if (!isLoading && data !== null) {
             setAvatar(data.avatar);
             setName(data.name);
             setUsername(data.username);
@@ -40,13 +42,10 @@ export default function UserDetail({params}){
 
     return (
         <Container className="mt-5" style={{ maxWidth: '500px' }}>
-            {isLoading
-            ?
-            <div className="text-center">
-                <Spinner animation="border" />
-                <p>Cargando usuarios...</p>
-            </div> 
-            : 
+            {
+                error !== undefined ? <Danger error={error} /> : 
+                isLoading ? <Loading message='Cargando usuarios' /> :
+                data === null ? <Warning message='Usuario no existe' /> :
                 <Card>
                     <Card.Img
                     variant="top"
@@ -89,7 +88,7 @@ export default function UserDetail({params}){
                             type="text"
                             name="role"
                             value={data.role}
-                            disabled // Mantener deshabilitado si el role no es editable
+                            disabled
                             />
                         </Form.Group>
                         <Button variant="success" onClick={handleSave}>

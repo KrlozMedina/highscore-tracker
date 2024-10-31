@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { useCreateUserMutation } from 'hst/store/services/users.api';
 import SocialLoginButtons from 'hst/components/molecules/SocialLoginButtons';
 import InputField from 'hst/components/atoms/InputField';
-import Button from 'hst/components/atoms/Button';
+import { Button } from 'react-bootstrap';
 
 const LoginPage = () => {
   const [createUser, { isUpdating }] = useCreateUserMutation();
@@ -38,7 +38,7 @@ const LoginPage = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <Button text="Login" type="submit" className="btn-primary" />
+        <Button type="submit" className="btn-primary">Login</Button>
       </form>
       <div className="my-3">
         <p className="text-center">Or login with:</p>

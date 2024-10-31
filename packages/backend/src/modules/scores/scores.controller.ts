@@ -4,15 +4,18 @@ import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto';
 import { CreateScoreDto } from './dto/create-score.dto';
 import { ScoreDto } from './dto/score.dto';
 
-@Controller('scores')
+@Controller('scores/leaderboard')
 export class ScoresController {
-    constructor(
-        private scoreService: ScoresService
-    ){}
+    constructor(private scoreService: ScoresService){}
 
-    @Get('/leaderboard')
-    getScores(@Query() paginationQuery: PaginationQueryDto) {
-        return this.scoreService.getAllScores(paginationQuery);
+    // @Get('/leaderboard')
+    // getScores(@Query() paginationQuery: PaginationQueryDto) {
+    //     return this.scoreService.getAllScores(paginationQuery);
+    // }
+
+    @Get()
+    bestScores() {
+        return this.scoreService.getBestScores();
     }
 }
 
@@ -32,7 +35,6 @@ export class ScoresByAdmin {
 
     @Get()
     getScores(@Query() paginationQuery: PaginationQueryDto) {
-        console.log('hola')
         return this.scoreService.getAllScores(paginationQuery);
     }
 
