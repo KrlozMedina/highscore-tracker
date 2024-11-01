@@ -4,24 +4,14 @@ import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto';
 import { CreateScoreDto } from './dto/create-score.dto';
 import { ScoreDto } from './dto/score.dto';
 
-@Controller('scores/leaderboard')
-export class ScoresController {
-    constructor(private scoreService: ScoresService){}
-
-    // @Get('/leaderboard')
-    // getScores(@Query() paginationQuery: PaginationQueryDto) {
-    //     return this.scoreService.getAllScores(paginationQuery);
-    // }
-
-    @Get()
-    bestScores() {
-        return this.scoreService.getBestScores();
-    }
-}
-
 @Controller('scores')
 export class ScoreController {
-    constructor (private readonly scoreService: ScoresService) {}
+    constructor(private scoreService: ScoresService){}
+
+    @Get('/leaderboard')
+    getScores(@Query() paginationQuery: PaginationQueryDto) {
+        return this.scoreService.getAllScores(paginationQuery);
+    }
 
     @Post('/:id')
     createScore(@Body() createScoreDto: CreateScoreDto): ScoreDto{

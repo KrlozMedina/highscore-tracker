@@ -16,6 +16,7 @@ export default function LeaderBoard() {
                 error !== undefined ? <Danger error={error} /> : 
                 isLoading ? <Loading message='Cargando LeaderBoard' /> :
                 data.total === 0 ? <Warning message='No hay puntujes para mostrar.' /> :
+                // console.log(data)
                 <Table striped bordered hover>
                     <thead>
                         <tr>

@@ -10,7 +10,7 @@ export const scoresApi = createApi({
             query: (userId) => `users/admin/scores/${userId}`
         }),
         getLeaderBoard: builder.query({
-            query: () => `users/admin/scores`
+            query: () => 'scores/leaderboard'
         }),
         createScore: builder.mutation({
             query: (body) => ({
