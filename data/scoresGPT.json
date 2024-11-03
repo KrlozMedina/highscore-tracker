@@ -1,0 +1,802 @@
+[
+    {
+        "score_id": "60fb6914-5eb2-490d-b0c2-1c48611bb14e",
+        "user_id": "4ed031f6-8495-4cd8-8ad2-0bbfd625c2a8",
+        "game": "if",
+        "score": 6068,
+        "createdAt": "2022-12-12T15:25:54",
+        "updatedAt": "2024-03-26T20:45:28"
+    },
+    {
+        "score_id": "89b973ef-1719-4292-8d8a-ffaa97a67c81",
+        "user_id": "14366d49-e2c1-41b4-bea3-43f3dccc1712",
+        "game": "reveal",
+        "score": 1482,
+        "createdAt": "2023-08-06T11:19:32",
+        "updatedAt": "2023-11-25T19:34:05"
+    },
+    {
+        "score_id": "510c1641-62fb-431f-9feb-2bbb8d649552",
+        "user_id": "de70c0cf-af70-43c1-8355-1bd12ed8c7a6",
+        "game": "major",
+        "score": 700,
+        "createdAt": "2023-09-28T00:02:34",
+        "updatedAt": "2024-03-16T08:15:29"
+    },
+    {
+        "score_id": "4214daa5-4a29-4d17-b848-936a964441ce",
+        "user_id": "56bbb297-975b-49d9-92f5-ffa313b7fb59",
+        "game": "stuff",
+        "score": 4681,
+        "createdAt": "2023-01-06T06:51:05",
+        "updatedAt": "2024-09-26T00:50:22"
+    },
+    {
+        "score_id": "8ab1e1b0-a3d5-4517-9e43-3dc03daf7e2b",
+        "user_id": "4ed031f6-8495-4cd8-8ad2-0bbfd625c2a8",
+        "game": "create",
+        "score": 5417,
+        "createdAt": "2022-11-09T03:09:33",
+        "updatedAt": "2024-04-27T02:19:18"
+    },
+    {
+        "score_id": "3b94ab01-5bc1-49b3-b080-2100e2a98772",
+        "user_id": "fa02e4f3-663f-41e2-8e79-36b3c2a7e8d9",
+        "game": "goal",
+        "score": 3490,
+        "createdAt": "2024-04-23T10:41:32",
+        "updatedAt": "2024-09-08T12:39:37"
+    },
+    {
+        "score_id": "7d538624-43f3-4556-a3e7-34bbdca30d6c",
+        "user_id": "fcb805aa-d5c2-470b-b50b-0198af59dfc6",
+        "game": "no",
+        "score": 9505,
+        "createdAt": "2024-06-09T17:57:58",
+        "updatedAt": "2024-09-16T10:20:39"
+    },
+    {
+        "score_id": "d394884e-dc09-42d9-a8eb-4a93d5fd0b60",
+        "user_id": "75cb2777-1cfa-41a0-93e0-b92252476275",
+        "game": "again",
+        "score": 7410,
+        "createdAt": "2024-05-05T20:01:31",
+        "updatedAt": "2024-07-23T02:42:08"
+    },
+    {
+        "score_id": "828814a0-bf34-4ed7-b1ff-1c3d47179fe9",
+        "user_id": "89e36577-4188-45b5-b377-d628495c32c4",
+        "game": "mean",
+        "score": 135,
+        "createdAt": "2024-10-20T17:29:04",
+        "updatedAt": "2024-05-11T07:30:13"
+    },
+    {
+        "score_id": "1eac5caf-9942-4b4d-bb00-08197ada234b",
+        "user_id": "47d18180-79b9-4326-9157-95249ee30ec3",
+        "game": "wall",
+        "score": 4573,
+        "createdAt": "2023-05-02T04:44:53",
+        "updatedAt": "2023-11-08T13:05:18"
+    },
+    {
+        "score_id": "3a41afa7-b369-46a6-99a2-09a16c512470",
+        "user_id": "54eb07de-6e83-439f-9a54-696f64b55569",
+        "game": "support",
+        "score": 6738,
+        "createdAt": "2024-04-14T00:15:55",
+        "updatedAt": "2024-07-15T19:37:07"
+    },
+    {
+        "score_id": "62f54095-ee87-4a46-9bda-fc20fe462039",
+        "user_id": "44995915-919f-4c69-9ad1-a14dc60dac0c",
+        "game": "organization",
+        "score": 8134,
+        "createdAt": "2023-11-01T06:05:14",
+        "updatedAt": "2024-07-21T11:04:46"
+    },
+    {
+        "score_id": "eaa150f3-b778-4a6f-b0a7-29c93687d8ce",
+        "user_id": "8614c6a8-8f3d-4325-806d-8b675e815ef5",
+        "game": "sport",
+        "score": 657,
+        "createdAt": "2023-01-06T13:49:41",
+        "updatedAt": "2024-06-12T17:08:19"
+    },
+    {
+        "score_id": "3c18f2ad-bd09-4859-aef5-17e1d287d10c",
+        "user_id": "eb415da8-ca25-4842-9e69-a1db8a94a71f",
+        "game": "lot",
+        "score": 846,
+        "createdAt": "2024-05-15T07:07:57",
+        "updatedAt": "2023-12-10T20:28:25"
+    },
+    {
+        "score_id": "d8f6fb9c-5c40-480d-aaf9-1c0241754527",
+        "user_id": "924c0760-8ec2-47fe-ba31-0493581a5c09",
+        "game": "argue",
+        "score": 9387,
+        "createdAt": "2022-12-17T00:49:35",
+        "updatedAt": "2024-04-13T06:05:10"
+    },
+    {
+        "score_id": "7e2685e8-0b77-4a23-a78c-96e57f396070",
+        "user_id": "14366d49-e2c1-41b4-bea3-43f3dccc1712",
+        "game": "rock",
+        "score": 8197,
+        "createdAt": "2024-10-16T08:59:54",
+        "updatedAt": "2024-08-04T00:57:58"
+    },
+    {
+        "score_id": "bc425192-e850-4533-a00a-5e922ad4bfcf",
+        "user_id": "e16d998e-d89d-4ed1-9f07-84337b5d9f8d",
+        "game": "under",
+        "score": 1972,
+        "createdAt": "2023-09-25T17:43:09",
+        "updatedAt": "2024-10-07T16:12:53"
+    },
+    {
+        "score_id": "ccad0077-e795-435c-b369-e65d710b16aa",
+        "user_id": "cdc05100-1622-4c7b-87a3-6c4e6f638ce5",
+        "game": "though",
+        "score": 358,
+        "createdAt": "2023-07-13T19:31:29",
+        "updatedAt": "2024-07-09T04:21:12"
+    },
+    {
+        "score_id": "dc476f01-315c-449b-8fed-bab1d8bd3c2b",
+        "user_id": "75cb2777-1cfa-41a0-93e0-b92252476275",
+        "game": "plan",
+        "score": 6290,
+        "createdAt": "2024-08-12T10:44:23",
+        "updatedAt": "2024-11-01T02:58:35"
+    },
+    {
+        "score_id": "002b731e-46b5-4e2c-a7d9-beb690f91e30",
+        "user_id": "d50f7012-b090-4c6f-b1aa-21cafb5528dd",
+        "game": "thousand",
+        "score": 5490,
+        "createdAt": "2023-07-08T21:58:00",
+        "updatedAt": "2024-05-21T19:53:44"
+    },
+    {
+        "score_id": "72996820-3e76-4944-9f94-c31fe201c6a4",
+        "user_id": "7f339659-cc9a-487d-bf68-9be124a086bf",
+        "game": "arrive",
+        "score": 1446,
+        "createdAt": "2023-10-29T01:17:22",
+        "updatedAt": "2024-02-12T23:41:54"
+    },
+    {
+        "score_id": "f18923f6-e729-443e-bbf5-1f4c22968f4a",
+        "user_id": "28477e52-52aa-410c-8475-2f37e77b506f",
+        "game": "half",
+        "score": 8038,
+        "createdAt": "2022-12-25T17:45:15",
+        "updatedAt": "2024-05-24T06:55:23"
+    },
+    {
+        "score_id": "7a73578f-55d2-4f9d-bf04-ee23db72ccd3",
+        "user_id": "11085406-07aa-4976-a3ff-1c46d7d8d5ce",
+        "game": "write",
+        "score": 2190,
+        "createdAt": "2024-03-03T10:36:16",
+        "updatedAt": "2024-07-19T11:45:14"
+    },
+    {
+        "score_id": "fc718af2-0f15-457d-adb5-0051bef03e72",
+        "user_id": "60606bc6-6ad9-4079-b827-1fd893bcbc1d",
+        "game": "price",
+        "score": 3261,
+        "createdAt": "2024-05-08T18:56:49",
+        "updatedAt": "2024-10-03T09:43:08"
+    },
+    {
+        "score_id": "c17e28da-48b9-46ee-9507-ca3b533151e3",
+        "user_id": "924c0760-8ec2-47fe-ba31-0493581a5c09",
+        "game": "throughout",
+        "score": 8297,
+        "createdAt": "2024-01-09T19:51:30",
+        "updatedAt": "2024-07-27T04:44:52"
+    },
+    {
+        "score_id": "cc11a389-99fc-4f38-809a-de1a1b98e612",
+        "user_id": "fa02e4f3-663f-41e2-8e79-36b3c2a7e8d9",
+        "game": "similar",
+        "score": 367,
+        "createdAt": "2023-08-14T05:05:12",
+        "updatedAt": "2024-01-13T20:57:55"
+    },
+    {
+        "score_id": "290098a2-d5f2-45c4-9a17-208af7430f75",
+        "user_id": "07a83601-710d-411f-948b-ed1fc5d1c631",
+        "game": "writer",
+        "score": 3220,
+        "createdAt": "2023-01-15T06:24:33",
+        "updatedAt": "2024-01-23T21:34:48"
+    },
+    {
+        "score_id": "e85a7742-b1d8-47a9-80ae-c49d7b203030",
+        "user_id": "06dd1dc5-580e-414d-88af-c77b77a85fb7",
+        "game": "cup",
+        "score": 7778,
+        "createdAt": "2024-08-21T12:21:45",
+        "updatedAt": "2024-04-19T08:52:57"
+    },
+    {
+        "score_id": "dc74cc71-05db-4a4c-8944-0b78507ba1c7",
+        "user_id": "60606bc6-6ad9-4079-b827-1fd893bcbc1d",
+        "game": "heavy",
+        "score": 9353,
+        "createdAt": "2024-05-28T13:49:00",
+        "updatedAt": "2024-04-09T19:45:00"
+    },
+    {
+        "score_id": "536ffb28-02d9-4bbf-a784-6585c4df496b",
+        "user_id": "a77c6385-0388-48ce-b060-5a1a47624a45",
+        "game": "return",
+        "score": 9933,
+        "createdAt": "2024-03-06T20:21:00",
+        "updatedAt": "2024-06-24T04:34:00"
+    },
+    {
+        "score_id": "bdf3b8ed-bce8-4fc8-bd93-f7d68412cd03",
+        "user_id": "56bbb297-975b-49d9-92f5-ffa313b7fb59",
+        "game": "will",
+        "score": 4101,
+        "createdAt": "2023-02-12T14:43:55",
+        "updatedAt": "2024-06-10T20:10:27"
+    },
+    {
+        "score_id": "2551e266-e525-4161-a676-1abc8ccbc72f",
+        "user_id": "c42da2ec-3d03-44d0-84b0-b3f12e3e3b62",
+        "game": "toward",
+        "score": 8531,
+        "createdAt": "2024-06-13T03:23:04",
+        "updatedAt": "2024-05-04T18:41:03"
+    },
+    {
+        "score_id": "c592ce57-3702-4fc1-ab91-6ad6956d9140",
+        "user_id": "b955744d-b857-44ab-8b5b-1c1cc5582a19",
+        "game": "question",
+        "score": 5658,
+        "createdAt": "2023-01-13T13:11:04",
+        "updatedAt": "2023-12-16T12:10:16"
+    },
+    {
+        "score_id": "20dde2ad-8ae3-4146-81d4-aa98f6d9d433",
+        "user_id": "07a83601-710d-411f-948b-ed1fc5d1c631",
+        "game": "until",
+        "score": 9936,
+        "createdAt": "2024-07-17T19:07:58",
+        "updatedAt": "2024-08-13T07:29:58"
+    },
+    {
+        "score_id": "b69f91d6-5747-409b-86f6-9f75928640ae",
+        "user_id": "ba902b55-2a11-4e4d-b2b3-74960df48fb3",
+        "game": "several",
+        "score": 4688,
+        "createdAt": "2024-02-13T08:15:11",
+        "updatedAt": "2023-11-12T02:16:35"
+    },
+    {
+        "score_id": "c0d60df1-d0be-445e-a5f2-3b0f77851c93",
+        "user_id": "e4380cde-8607-48e5-baff-463b56d83208",
+        "game": "sound",
+        "score": 2345,
+        "createdAt": "2024-10-21T18:35:43",
+        "updatedAt": "2024-07-15T09:03:43"
+    },
+    {
+        "score_id": "cf71f075-8541-4eff-a395-7ba0320fe79e",
+        "user_id": "4d6bee9a-9cf2-4308-bd8b-5d3ec32289d0",
+        "game": "meeting",
+        "score": 7146,
+        "createdAt": "2023-08-06T21:46:12",
+        "updatedAt": "2024-09-11T19:08:34"
+    },
+    {
+        "score_id": "3e784944-a684-463f-8c1a-1985ea1660ed",
+        "user_id": "984d5cd2-0628-4e79-b604-1f1e6cf1eac0",
+        "game": "majority",
+        "score": 2758,
+        "createdAt": "2024-03-25T18:00:14",
+        "updatedAt": "2024-01-25T14:51:45"
+    },
+    {
+        "score_id": "34c72619-a65d-4815-aa5d-0944f5f3860a",
+        "user_id": "31b7db56-ae4b-4d5e-b966-ff5dc141ba20",
+        "game": "southern",
+        "score": 2444,
+        "createdAt": "2023-01-29T09:36:31",
+        "updatedAt": "2024-10-15T18:40:03"
+    },
+    {
+        "score_id": "e384addd-37b8-460f-8fca-f512b14099ed",
+        "user_id": "13632f74-16a5-4197-baa3-d7c679ed10aa",
+        "game": "beyond",
+        "score": 3307,
+        "createdAt": "2023-12-09T07:56:49",
+        "updatedAt": "2024-10-18T06:52:59"
+    },
+    {
+        "score_id": "929168ce-ed3a-4f4d-82f7-1556b1ee998e",
+        "user_id": "8b9b842b-5b06-40ed-939e-3b523063711b",
+        "game": "rule",
+        "score": 259,
+        "createdAt": "2024-09-06T03:18:12",
+        "updatedAt": "2024-10-01T09:47:01"
+    },
+    {
+        "score_id": "394b036d-fc68-43b8-ab84-e789f5238196",
+        "user_id": "e544d8e3-6d57-4a56-bdd9-b7589e0fffe0",
+        "game": "outside",
+        "score": 3205,
+        "createdAt": "2022-11-21T05:50:20",
+        "updatedAt": "2024-10-23T12:40:45"
+    },
+    {
+        "score_id": "1b3f00e1-acd4-4364-8851-be2fbf6df9ef",
+        "user_id": "33bd04ee-90be-4f60-a397-4dd42a681bf5",
+        "game": "down",
+        "score": 4354,
+        "createdAt": "2024-05-24T12:53:31",
+        "updatedAt": "2024-05-02T04:52:18"
+    },
+    {
+        "score_id": "fc57d05c-0871-4d4f-ad60-54b3c20e4437",
+        "user_id": "df19d787-811b-4a41-a845-4e87967d170c",
+        "game": "late",
+        "score": 2706,
+        "createdAt": "2023-04-22T00:36:18",
+        "updatedAt": "2024-03-18T06:17:23"
+    },
+    {
+        "score_id": "eab52b6f-9d46-4049-89b9-355243235d82",
+        "user_id": "e1fac597-dbf2-4933-ba19-4006f6a3c4d5",
+        "game": "hold",
+        "score": 182,
+        "createdAt": "2023-02-22T13:35:56",
+        "updatedAt": "2024-08-05T14:31:51"
+    },
+    {
+        "score_id": "8efd2d87-1df9-4e96-a93a-22bcd916151b",
+        "user_id": "71877eab-386c-4c4e-a8fd-734c6fd3a834",
+        "game": "green",
+        "score": 7837,
+        "createdAt": "2022-11-25T18:44:50",
+        "updatedAt": "2024-07-28T03:39:07"
+    },
+    {
+        "score_id": "660e9572-296a-4504-a2ce-a9ac06a874b3",
+        "user_id": "d50f7012-b090-4c6f-b1aa-21cafb5528dd",
+        "game": "with",
+        "score": 7132,
+        "createdAt": "2024-10-14T07:35:48",
+        "updatedAt": "2024-06-19T21:44:46"
+    },
+    {
+        "score_id": "e5b2f2fa-4533-4e2c-b80e-39d299304b2a",
+        "user_id": "de70c0cf-af70-43c1-8355-1bd12ed8c7a6",
+        "game": "lay",
+        "score": 4693,
+        "createdAt": "2023-01-15T09:48:26",
+        "updatedAt": "2024-10-01T23:09:12"
+    },
+    {
+        "score_id": "ca4b39d4-827a-4b6b-a03d-1326b8e31a23",
+        "user_id": "7f339659-cc9a-487d-bf68-9be124a086bf",
+        "game": "use",
+        "score": 5263,
+        "createdAt": "2023-01-04T10:23:17",
+        "updatedAt": "2024-04-10T02:26:55"
+    },
+    {
+        "score_id": "0d0d47e6-24da-4b63-a51e-fb7ef92dccb6",
+        "user_id": "273a9d27-90dd-45b5-8269-5e2daf542cad",
+        "game": "recent",
+        "score": 7950,
+        "createdAt": "2023-05-06T21:43:28",
+        "updatedAt": "2024-09-27T07:49:55"
+    },
+    {
+        "score_id": "be5a5e79-87e6-4a1c-830e-0f145a42dbf2",
+        "user_id": "c93103b2-91f3-4c95-903d-f6ff6fce1013",
+        "game": "attack",
+        "score": 8395,
+        "createdAt": "2023-08-12T06:33:07",
+        "updatedAt": "2024-04-07T16:26:19"
+    },
+    {
+        "score_id": "e8b26e86-60d2-4d77-ac5b-fed80ed62c6b",
+        "user_id": "4e750ee3-6aa3-4518-831a-6bd2eabff7f9",
+        "game": "writer",
+        "score": 1052,
+        "createdAt": "2023-06-04T12:15:07",
+        "updatedAt": "2024-01-09T16:56:44"
+    },
+    {
+        "score_id": "45299ef5-568c-4e01-b276-48c696c01860",
+        "user_id": "cdc05100-1622-4c7b-87a3-6c4e6f638ce5",
+        "game": "service",
+        "score": 5835,
+        "createdAt": "2022-11-14T22:40:29",
+        "updatedAt": "2024-10-05T08:11:47"
+    },
+    {
+        "score_id": "ec928c87-eb15-4298-8fd4-d12d7ae19ba3",
+        "user_id": "a77c6385-0388-48ce-b060-5a1a47624a45",
+        "game": "goal",
+        "score": 9333,
+        "createdAt": "2024-03-04T23:23:16",
+        "updatedAt": "2024-01-17T04:15:56"
+    },
+    {
+        "score_id": "54576c29-8e4c-40af-bdf5-f259da7ba273",
+        "user_id": "a77c6385-0388-48ce-b060-5a1a47624a45",
+        "game": "including",
+        "score": 6363,
+        "createdAt": "2024-06-09T08:11:20",
+        "updatedAt": "2024-07-09T09:48:28"
+    },
+    {
+        "score_id": "95964095-e85d-4845-a432-6b44d5317cb6",
+        "user_id": "eb415da8-ca25-4842-9e69-a1db8a94a71f",
+        "game": "case",
+        "score": 8215,
+        "createdAt": "2022-11-30T12:39:25",
+        "updatedAt": "2024-01-30T21:29:16"
+    },
+    {
+        "score_id": "0bbfaa19-d7a9-483d-ad03-50905119a76f",
+        "user_id": "c1315cc9-aaeb-46e6-96a3-7b9578a346e7",
+        "game": "home",
+        "score": 5784,
+        "createdAt": "2023-07-18T21:43:08",
+        "updatedAt": "2024-05-06T04:49:40"
+    },
+    {
+        "score_id": "d30408ac-e0d9-4807-b323-d9b36308848d",
+        "user_id": "11085406-07aa-4976-a3ff-1c46d7d8d5ce",
+        "game": "election",
+        "score": 473,
+        "createdAt": "2023-02-06T03:57:14",
+        "updatedAt": "2024-10-29T19:29:18"
+    },
+    {
+        "score_id": "8eeacde5-9f13-46f8-9d14-14c76a3c2b53",
+        "user_id": "e1dab812-632b-43f0-8d54-3ff224d55687",
+        "game": "grow",
+        "score": 9306,
+        "createdAt": "2024-06-13T12:23:33",
+        "updatedAt": "2023-11-11T09:27:56"
+    },
+    {
+        "score_id": "c9f93672-9f29-40c8-bf34-c2ce3ac39ca7",
+        "user_id": "d8392eab-c768-4b41-9a45-8bac172a05b3",
+        "game": "brother",
+        "score": 4842,
+        "createdAt": "2023-09-09T04:09:44",
+        "updatedAt": "2024-07-05T11:21:22"
+    },
+    {
+        "score_id": "d1db58c7-a2b5-4b96-bb82-619e71654a26",
+        "user_id": "4e750ee3-6aa3-4518-831a-6bd2eabff7f9",
+        "game": "name",
+        "score": 1922,
+        "createdAt": "2022-12-28T04:30:08",
+        "updatedAt": "2024-09-09T01:31:14"
+    },
+    {
+        "score_id": "a2c3a64a-879f-4ea7-9fd6-4c28e4318000",
+        "user_id": "8b4b29f1-8d58-4e36-ad0b-7b80f7fbbf58",
+        "game": "range",
+        "score": 2698,
+        "createdAt": "2024-06-04T06:00:39",
+        "updatedAt": "2024-02-29T13:36:06"
+    },
+    {
+        "score_id": "90c465e8-97c8-4cc5-9f3a-a1865efe0b48",
+        "user_id": "2ff89c3a-34c4-4f23-850c-6d3f8fed8d97",
+        "game": "successful",
+        "score": 2536,
+        "createdAt": "2022-11-11T07:04:59",
+        "updatedAt": "2024-02-22T04:42:41"
+    },
+    {
+        "score_id": "3e092555-5502-4312-861f-e872eb7b6c69",
+        "user_id": "13632f74-16a5-4197-baa3-d7c679ed10aa",
+        "game": "bar",
+        "score": 8587,
+        "createdAt": "2024-04-20T02:45:17",
+        "updatedAt": "2024-03-12T21:06:58"
+    },
+    {
+        "score_id": "a93b99bc-901a-44c5-bfcd-a62282693747",
+        "user_id": "e4380cde-8607-48e5-baff-463b56d83208",
+        "game": "experience",
+        "score": 2679,
+        "createdAt": "2023-01-11T07:27:14",
+        "updatedAt": "2024-05-25T13:54:00"
+    },
+    {
+        "score_id": "a3e4b2cf-350f-4124-8dc2-60d2ab07d262",
+        "user_id": "4d6bee9a-9cf2-4308-bd8b-5d3ec32289d0",
+        "game": "always",
+        "score": 878,
+        "createdAt": "2023-11-17T21:00:01",
+        "updatedAt": "2024-07-18T04:09:42"
+    },
+    {
+        "score_id": "0189899a-f2f3-44b3-bc47-732f9447ac20",
+        "user_id": "e16d998e-d89d-4ed1-9f07-84337b5d9f8d",
+        "game": "enjoy",
+        "score": 6928,
+        "createdAt": "2023-07-13T16:15:22",
+        "updatedAt": "2024-02-08T02:14:40"
+    },
+    {
+        "score_id": "e2641794-068b-4bfa-8217-c3a2ebb5e510",
+        "user_id": "60606bc6-6ad9-4079-b827-1fd893bcbc1d",
+        "game": "land",
+        "score": 9953,
+        "createdAt": "2024-04-18T16:33:53",
+        "updatedAt": "2024-01-20T21:19:45"
+    },
+    {
+        "score_id": "bc0bf561-abd5-4dae-a13d-7b297edbd0b4",
+        "user_id": "c1151a95-46f1-4a89-8f89-9318726837ba",
+        "game": "attention",
+        "score": 3471,
+        "createdAt": "2023-08-25T12:50:05",
+        "updatedAt": "2023-12-03T06:29:16"
+    },
+    {
+        "score_id": "cef98c58-231b-4f5a-9c87-74ed17e15dc8",
+        "user_id": "dec1c517-3187-4c0a-9151-9e85767f73c4",
+        "game": "generation",
+        "score": 4860,
+        "createdAt": "2023-04-17T07:49:58",
+        "updatedAt": "2024-08-26T19:13:35"
+    },
+    {
+        "score_id": "85a8ff86-9e1c-4817-a384-9a1724da27c2",
+        "user_id": "7b1393ac-0179-4821-b2bf-48f94372a884",
+        "game": "other",
+        "score": 3929,
+        "createdAt": "2023-12-18T11:42:07",
+        "updatedAt": "2024-06-17T22:29:04"
+    },
+    {
+        "score_id": "b15fbe92-3004-40e1-84e8-7f3dd11b2e2a",
+        "user_id": "a9c4f244-1fb5-48bc-bc84-a857edc60d0d",
+        "game": "suffer",
+        "score": 9506,
+        "createdAt": "2024-08-14T10:20:27",
+        "updatedAt": "2024-07-07T07:36:36"
+    },
+    {
+        "score_id": "5e27fd56-147f-4b56-a10d-adc56eba040a",
+        "user_id": "28f8949a-adb8-4109-9b6a-14455ecf0c43",
+        "game": "skin",
+        "score": 2478,
+        "createdAt": "2024-01-24T08:23:54",
+        "updatedAt": "2024-08-03T13:38:16"
+    },
+    {
+        "score_id": "dfe65625-285c-4bc8-b5b7-3aea7280b8d1",
+        "user_id": "56bbb297-975b-49d9-92f5-ffa313b7fb59",
+        "game": "task",
+        "score": 3013,
+        "createdAt": "2024-10-16T12:46:53",
+        "updatedAt": "2024-03-19T06:32:40"
+    },
+    {
+        "score_id": "905869c9-0b01-4c47-88dd-9beeb16c2ffd",
+        "user_id": "a9c4f244-1fb5-48bc-bc84-a857edc60d0d",
+        "game": "our",
+        "score": 1857,
+        "createdAt": "2023-01-13T01:59:08",
+        "updatedAt": "2023-11-08T16:01:05"
+    },
+    {
+        "score_id": "080e8fc3-a71a-44d8-bb60-74dfea0c3285",
+        "user_id": "2ff89c3a-34c4-4f23-850c-6d3f8fed8d97",
+        "game": "kitchen",
+        "score": 9953,
+        "createdAt": "2023-12-14T03:32:21",
+        "updatedAt": "2024-03-23T20:15:36"
+    },
+    {
+        "score_id": "6c528258-5032-41fd-a00f-82b5194b7d7e",
+        "user_id": "33bd04ee-90be-4f60-a397-4dd42a681bf5",
+        "game": "think",
+        "score": 1534,
+        "createdAt": "2024-02-24T17:03:11",
+        "updatedAt": "2023-12-29T12:19:18"
+    },
+    {
+        "score_id": "2a1eb0d6-5d2b-49d9-8c5b-3c424256db12",
+        "user_id": "4f3de6a8-ca9b-42d4-b96e-02155d80807f",
+        "game": "Democrat",
+        "score": 1241,
+        "createdAt": "2023-04-24T06:15:57",
+        "updatedAt": "2024-01-29T09:52:23"
+    },
+    {
+        "score_id": "985e5407-4280-4dc7-9b6d-b144561d11fe",
+        "user_id": "e4380cde-8607-48e5-baff-463b56d83208",
+        "game": "brother",
+        "score": 5727,
+        "createdAt": "2023-03-23T17:48:09",
+        "updatedAt": "2024-10-05T12:50:05"
+    },
+    {
+        "score_id": "7f43544b-5a30-4365-9594-c24565454086",
+        "user_id": "07a83601-710d-411f-948b-ed1fc5d1c631",
+        "game": "international",
+        "score": 7584,
+        "createdAt": "2024-02-07T15:58:56",
+        "updatedAt": "2024-08-27T04:07:03"
+    },
+    {
+        "score_id": "b978d764-ca73-40c6-b329-bbe8b8068667",
+        "user_id": "2817cf4c-4d9e-4d96-b482-66ffc2dbf010",
+        "game": "receive",
+        "score": 4021,
+        "createdAt": "2023-07-12T08:55:07",
+        "updatedAt": "2024-07-29T17:54:26"
+    },
+    {
+        "score_id": "37d17197-e4e3-4a00-8002-6673f4ae0289",
+        "user_id": "89e36577-4188-45b5-b377-d628495c32c4",
+        "game": "policy",
+        "score": 6190,
+        "createdAt": "2023-03-01T05:23:40",
+        "updatedAt": "2024-08-05T02:32:53"
+    },
+    {
+        "score_id": "02200d25-a6fb-4244-99ab-fcb06ea8a313",
+        "user_id": "fcb805aa-d5c2-470b-b50b-0198af59dfc6",
+        "game": "purpose",
+        "score": 3109,
+        "createdAt": "2024-04-27T20:09:06",
+        "updatedAt": "2023-12-18T17:52:56"
+    },
+    {
+        "score_id": "716807bb-3a34-4440-9aa9-5f3c42d0a17b",
+        "user_id": "b8da37fb-d18c-4bc7-905f-8f91609050ea",
+        "game": "bag",
+        "score": 5398,
+        "createdAt": "2023-09-22T23:57:44",
+        "updatedAt": "2024-08-08T05:09:21"
+    },
+    {
+        "score_id": "22ab4517-ac87-4346-b0ce-ca4f5bc1ca09",
+        "user_id": "c1151a95-46f1-4a89-8f89-9318726837ba",
+        "game": "place",
+        "score": 273,
+        "createdAt": "2023-07-29T14:59:33",
+        "updatedAt": "2024-02-12T13:04:19"
+    },
+    {
+        "score_id": "14e9292b-f649-4884-aadc-aa39a5a89a68",
+        "user_id": "56bbb297-975b-49d9-92f5-ffa313b7fb59",
+        "game": "time",
+        "score": 1859,
+        "createdAt": "2024-09-20T07:35:55",
+        "updatedAt": "2024-02-23T13:25:07"
+    },
+    {
+        "score_id": "d7d79e0d-228c-4bf8-af39-9f2d5a2d63b7",
+        "user_id": "60606bc6-6ad9-4079-b827-1fd893bcbc1d",
+        "game": "piece",
+        "score": 3676,
+        "createdAt": "2024-10-26T00:41:38",
+        "updatedAt": "2023-11-28T23:02:07"
+    },
+    {
+        "score_id": "03b61238-01c3-4df7-87c7-895509d5291b",
+        "user_id": "44726745-438f-43cc-8a84-727ebaa1c5a4",
+        "game": "responsibility",
+        "score": 8887,
+        "createdAt": "2024-02-08T12:10:48",
+        "updatedAt": "2023-12-31T00:25:59"
+    },
+    {
+        "score_id": "8b2a70e5-fd2c-47a0-8ed0-57cb5764d5a4",
+        "user_id": "31b7db56-ae4b-4d5e-b966-ff5dc141ba20",
+        "game": "several",
+        "score": 9268,
+        "createdAt": "2023-11-16T07:03:56",
+        "updatedAt": "2024-09-25T19:46:55"
+    },
+    {
+        "score_id": "7782a2d8-d4ea-4b19-941b-fe662dda5feb",
+        "user_id": "7b1393ac-0179-4821-b2bf-48f94372a884",
+        "game": "authority",
+        "score": 6487,
+        "createdAt": "2024-03-09T02:45:00",
+        "updatedAt": "2024-02-16T22:33:35"
+    },
+    {
+        "score_id": "6eb78f83-a2f4-45c4-81b7-4bbe59986de6",
+        "user_id": "5b440491-9486-428f-b4bb-f61ef5786620",
+        "game": "view",
+        "score": 4771,
+        "createdAt": "2023-05-15T10:14:40",
+        "updatedAt": "2024-02-15T05:38:28"
+    },
+    {
+        "score_id": "25f88873-aa26-452b-bece-6ab42e8d046a",
+        "user_id": "3c4ce469-001b-4013-b59d-aa438ff9fcac",
+        "game": "believe",
+        "score": 89,
+        "createdAt": "2022-12-10T18:44:12",
+        "updatedAt": "2024-01-26T17:51:38"
+    },
+    {
+        "score_id": "297bc784-0965-4ba1-bd63-ca97185c0f4a",
+        "user_id": "cdc05100-1622-4c7b-87a3-6c4e6f638ce5",
+        "game": "probably",
+        "score": 2896,
+        "createdAt": "2023-12-16T12:49:18",
+        "updatedAt": "2023-12-14T13:53:27"
+    },
+    {
+        "score_id": "fed0dcc3-4a6d-4b3d-a9e0-648d654ac080",
+        "user_id": "984d5cd2-0628-4e79-b604-1f1e6cf1eac0",
+        "game": "give",
+        "score": 7135,
+        "createdAt": "2023-10-25T14:04:56",
+        "updatedAt": "2024-09-02T04:11:52"
+    },
+    {
+        "score_id": "12727829-6d83-4416-af47-75aa4278724c",
+        "user_id": "07a83601-710d-411f-948b-ed1fc5d1c631",
+        "game": "everybody",
+        "score": 9992,
+        "createdAt": "2023-12-23T17:10:17",
+        "updatedAt": "2024-01-27T02:22:32"
+    },
+    {
+        "score_id": "4712409b-670a-4bc0-81b4-d18981eb2df3",
+        "user_id": "c9fcf1e9-cd91-499c-b59e-bf804b1f94e3",
+        "game": "shake",
+        "score": 5315,
+        "createdAt": "2024-06-12T12:20:22",
+        "updatedAt": "2024-01-26T05:30:23"
+    },
+    {
+        "score_id": "a68ddc32-8838-4ebf-9de1-7ec51f9f2fc5",
+        "user_id": "8b4b29f1-8d58-4e36-ad0b-7b80f7fbbf58",
+        "game": "different",
+        "score": 5324,
+        "createdAt": "2023-06-24T16:31:58",
+        "updatedAt": "2024-04-06T00:32:03"
+    },
+    {
+        "score_id": "63ac9548-5566-419c-9d1d-f7e0ff0e69ea",
+        "user_id": "9049fbf8-354e-42e0-9c9c-c09954e5b5d5",
+        "game": "media",
+        "score": 4113,
+        "createdAt": "2024-07-08T19:39:24",
+        "updatedAt": "2024-08-03T08:23:23"
+    },
+    {
+        "score_id": "6e2584f3-b03f-4265-974b-a624c1bae9f6",
+        "user_id": "bd2f371b-3edf-4294-874e-3f08e2c15db0",
+        "game": "others",
+        "score": 4942,
+        "createdAt": "2023-02-11T20:45:57",
+        "updatedAt": "2023-11-23T08:25:41"
+    },
+    {
+        "score_id": "b4227e53-8393-4d88-8e2e-1931b59392bb",
+        "user_id": "5b440491-9486-428f-b4bb-f61ef5786620",
+        "game": "tree",
+        "score": 711,
+        "createdAt": "2024-05-18T17:42:19",
+        "updatedAt": "2024-11-01T08:27:13"
+    }
+]

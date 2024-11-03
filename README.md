@@ -2,6 +2,8 @@
 
 ## Índice
 
+## Índice
+
 - [Descripción del Proyecto](#descripción-del-proyecto)
 - [Objetivos del Proyecto](#objetivos-del-proyecto)
 - [Funcionalidades Principales](#funcionalidades-principales)
@@ -68,6 +70,7 @@ El proyecto **HighScore Tracker** es una aplicación web fullstack que permite g
 - Nest.JS
 - MongoDB con Mongoose
 - PostgreSQL
+- Redis
 - JWT (JSON Web Token)
 - bcrypt
 
@@ -80,7 +83,7 @@ El proyecto **HighScore Tracker** es una aplicación web fullstack que permite g
 
 ### Backend
 
-El backend del proyecto se construye con NestJS para manejar las API y la lógica de negocio. Se utiliza MongoDB para gestionar la base de datos de puntuaciones y PostgreSQL para la autenticación y gestión de usuarios.
+El backend del proyecto se construye con NestJS para manejar las API y la lógica de negocio. Se utiliza MongoDB para gestionar la base de datos de puntuaciones, PostgreSQL para la autenticación y gestión de usuarios, y Redis para la gestión de sesiones.
 
 #### **Rutas de Usuario**:
 
@@ -165,30 +168,30 @@ La interfaz de usuario se construye con **Next.js** y se utiliza **Redux Toolkit
 
 - **Get User Profile**
     - **GET** `/users/profile/{userId}`
-  - **Summary:** Get user profile
-  - **Description:** Get detail of user profile by ID
-  - **Path Parameters:**
-    - `userId`: The ID that need to be fetched
-  - **Responses:**
-    - **200:** User data uploaded successfully
-    - **401:** Unauthorized
-    - **400:** User bad request
+        - **Summary:** Get user profile
+        - **Description:** Get detail of user profile by ID
+        - **Path Parameters:**
+            - `userId`: The ID that need to be fetched
+        - **Responses:**
+            - **200:** User data uploaded successfully
+            - **401:** Unauthorized
+            - **400:** User bad request
 
 - **Update User Profile**
     - **PUT** `/users/profile/{userId}`
         - **Summary:** Update profile user
         - **Description:** Update profile user by ID
         - **Path Parameters:**
-        - `userId`: The ID that need to be fetched
+            - `userId`: The ID that need to be fetched
         - **Request Body:**
         ```json
         {
-        "id": "45247989-8807-4cec-bf65-50632859a8f5",
-        "name": "Leidy Santos",
-        "username": "LCSA",
-        "email": "prueba@yopmail.com",
-        "password": "114c884d2a1cd1cde577ff109c3db5c6",
-        "role": "admin"
+            "id": "45247989-8807-4cec-bf65-50632859a8f5",
+            "name": "Leidy Santos",
+            "username": "LCSA",
+            "email": "prueba@yopmail.com",
+            "password": "114c884d2a1cd1cde577ff109c3db5c6",
+            "role": "admin"
         }
         ```
         - **Responses:**
@@ -196,145 +199,72 @@ La interfaz de usuario se construye con **Next.js** y se utiliza **Redux Toolkit
             - **401:** Unauthorized
             - **400:** User bad request
 
-- **Get Scores of User** 
+- **Get Scores of User**
     - **GET** `/users/scores/{userId}`
-  - **Summary:** Get scores
-  - **Description:** Get scores of user by user ID
-  - **Path Parameters:**
-    - `userId`: The ID that need to be fetched
-  - **Query Parameters:**
-    - `page`: Actual page (default: 1)
-    - `limit`: Number of elements per page (default: 10)
-  - **Responses:**
-    - **200:** User data uploaded successfully
-    - **401:** Unauthorized
-    - **400:** User bad request
+        - **Summary:** Get scores
+        - **Description:** Get scores of user by user ID
+        - **Path Parameters:**
+            - `userId`: The ID that need to be fetched
+        - **Query Parameters:**
+            - `page`: Actual page (default: 1)
+            - `limit`: Number of elements per page (default: 10)
+        - **Responses:**
+            - **200:** Scores retrieved successfully
+            - **401:** Unauthorized
+            - **400:** User bad request
 
 #### Scores
 
-- **Create Score**
+- **Add Score**
     - **POST** `/scores/{userId}`
-        - **Summary:** Create score
-        - **Description:** Create new score
+        - **Summary:** Add score
+        - **Description:** Add a new score for the specified user
         - **Path Parameters:**
-        - `userId`: The ID that need to be fetched
+            - `userId`: The ID of the user for whom the score is added
         - **Request Body:**
         ```json
         {
-        "score": 100
+            "score": 1000,
+            "gameId": "game123"
         }
         ```
         - **Responses:**
-            - **201:** Score created successfully
+            - **201:** Score added successfully
             - **401:** Unauthorized
             - **400:** User bad request
 
-- **Get Global Scores**
+- **Get Leaderboard**
     - **GET** `/scores/leaderboard`
-    - **Summary:** Get global scores
-    - **Description:** Get better scores
-    - **Query Parameters:**
-        - `page`: Actual page (default: 1)
-        - `limit`: Number of elements per page (default: 10)
-    - **Responses:**
-        - **200:** Global scores uploaded successfully
-        - **401:** Unauthorized
-        - **400:** User bad request
-
-#### Admin Users
-
-- **Get All Users**
-- **GET** `/users/admin`
-    - **Summary:** Get all users
-    - **Description:** Get all users by admin
-    - **Query Parameters:**
-        - `page`: Actual page (default: 1)
-        - `limit`: Number of elements per page (default: 10)
-    - **Responses:**
-        - **200:** All users uploaded successfully
-        - **401:** Unauthorized
-        - **400:** User bad request
-        - **403:** Valid token, no permission for this action
-
-- **Enable or Block User**
-    - **PATCH** `/users/admin/{userId}`
-        - **Summary:** Enable or block user
-        - **Description:** Enable or block user by admin
-        - **Path Parameters:**
-            - `userId`: The ID that need to be fetched
+        - **Summary:** Get leaderboard
+        - **Description:** Fetch the highest scores globally
+        - **Query Parameters:**
+            - `page`: Actual page (default: 1)
+            - `limit`: Number of scores per page (default: 10)
         - **Responses:**
-            - **200:** User enabled or blocked successfully
-            - **401:** Unauthorized
-            - **400:** User bad request
-            - **403:** Valid token, no permission for this action
-
-- **Delete User**
-    - **DELETE** `/users/admin/{userId}`
-        - **Summary:** Delete user
-        - **Description:** Delete user by admin
-        - **Path Parameters:**
-            - `userId`: The ID that need to be fetched
-        - **Responses:**
-            - **200:** User removed successfully
-            - **401:** Unauthorized
-            - **400:** User bad request
-            - **403:** Valid token, no permission for this action
-
-#### Admin Scores
-
-- **Delete Specific Score**
-    - **DELETE** `/users/admin/scores/{scoreId}`
-        - **Summary:** Delete specific score
-        - **Description:** Delete specific score by admin
-        - **Path Parameters:**
-            - `scoreId`: The ID that need to be fetched
-        - **Responses:**
-            - **200:** Score removed successfully
-            - **401:** Unauthorized
-            - **400:** User bad request
-            - **403:** Valid token, no permission for this action
-
+            - **200:** Leaderboard retrieved successfully
+            - **404:** No scores found
 
 ### Endpoints del Frontend
 
-#### **Autenticación y Registro**
+El frontend se comunica con el backend a través de las API mencionadas anteriormente, usando **RTK Query** para realizar solicitudes a los endpoints y gestionar el estado de los datos.
 
-- **/auth/login** - Pantalla de inicio de sesión de usuario.
-- **/auth/register** - Pantalla de registro de usuario.
+### Diagrama de la Base de Datos
 
-#### **Interfaz del Jugador**
+Aquí se muestra un diagrama simple que ilustra la estructura de la base de datos, incluyendo las relaciones entre las colecciones y los atributos principales.
 
-- **/users/profile/:userId** - Pantalla del perfil de usuario, donde se pueden ver y gestionar las puntuaciones.
-- **/scores/leaderboard** - Muestra el ranking global de los jugadores.
-
-#### **Panel de Administración**
-
-- **/users/admin** - Pantalla de gestión de usuarios, donde los administradores pueden añadir, eliminar o bloquear usuarios.
-- **/users/scores** - Pantalla de gestión de puntuaciones, donde los administradores pueden eliminar puntuaciones.
-
-## Diagrama de la Base de Datos
-
-### **Base de datos de Usuarios (PostgreSQL)**:
-
-- `userId`: Identificador único.
-- `username`: Nombre de usuario.
-- `name`: Nombre del jugador.
-- `email`: Correo electrónico.
-- `password`: Contraseña hash.
-- `role`: Rol del usuario (admin o jugador).
-- `status`: Estado del usuario (activo/inactivo).
-- `avatar`: Imagen de perfil del jugador.
-- `createdAt`: Fecha de creación.
-- `updatedAt`: Fecha de actualización.
-
-### **Colección de Puntuaciones (MongoDB)**:
-
-- `scoreId`: Identificador único de la puntuación.
-- `userId`: ID del jugador que hizo la puntuación.
-- `game`: Nombre del juego.
-- `score`: Valor de la puntuación.
-- `createdAt`: Fecha en que se creó la puntuación.
-- `updatedAt`: Fecha de actualización de la puntuación.
+```plaintext
++---------------+       +----------------+
+|    Users      |       |     Scores     |
++---------------+       +----------------+
+| _id           |<----- | _id            |
+| name          |       | userId         |
+| username      |       | score          |
+| email         |       | gameId         |
+| password      |       | date           |
+| role          |       +----------------+
+| status        |
++---------------+
+```
 
 ## Workspaces
 
@@ -376,14 +306,6 @@ El proyecto está configurado como un **monorepo** usando **pnpm workspaces** pa
   }
 }
 ```
-
-## Diagrama de la Base de Datos
-
-- **Base de datos de Usuarios**:
-  - userId, username, name, email, password, role, status, avatar, createdAt, updatedAt
-
-- **Colección de Puntuaciones**:
-  - scoreId, userId, game, score, createdAt, updatedAt
 
 ## Fases del Proyecto
 

@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { faker } from '@faker-js/faker';
 import { v4 as uuidv4 } from 'uuid';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -7,6 +7,7 @@ import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto';
 import { PaginatorDto } from '../scores/dto/paginator.dto';
 import { ScoreDto } from '../scores/dto/score.dto';
 import { PaginatorScoreDto } from '../scores/dto/paginatorScore.dto';
+import { PrismaService } from 'prisma/prisma.service';
 export interface User {
     id: string;
     email: string;
@@ -27,8 +28,8 @@ export interface Paginator {
 
 @Injectable()
 export class UsersService {
-    constructor() {
-        this.generateMockData();
+    constructor(private readonly prismaService: PrismaService) {
+        // this.generateMockData();
     }
 
     private users: User[] = [];
@@ -48,33 +49,58 @@ export class UsersService {
         }
     }
 
-    getAllUsers(paginationQuery: PaginationQueryDto): Paginator {
-        const { page = 1, limit = 10 } = paginationQuery;        
-        const start = (page - 1) * limit;
-        const end = Number(start) + Number(limit);
-
-        const data = this.users.slice(start, end);
-        const total = this.users.length;
-        const totalPages = Math.ceil(total / limit);
-
-        return <Paginator>{
-            data,
-            total,
-            page,
-            limit,
-            totalPages,
-        }
+    async getAllUsers() {
+        return this.prismaService.user.findMany();
     }
+
+    async getUserByUserId(userId: string) {
+        const user = await this.prismaService.user.findUnique({
+            where: { userId: userId },
+            select: {
+                userId: true,
+                name: true,
+                email: true
+            },
+        });
+
+        if (!user) {
+            throw new NotFoundException('Score not found');
+        }
+
+        return user;
+    }
+
+    createUser(userDto: CreateUserDto) {
+        return this.prismaService.user.create({data: userDto});
+    }
+
+    // getAllUsers(paginationQuery: PaginationQueryDto): Paginator {
+    //     const { page = 1, limit = 10 } = paginationQuery;        
+    //     const start = (page - 1) * limit;
+    //     const end = Number(start) + Number(limit);
+
+    //     const data = this.users.slice(start, end);
+    //     const total = this.users.length;
+    //     const totalPages = Math.ceil(total / limit);
+
+    //     return <Paginator>{
+    //         data,
+    //         total,
+    //         page,
+    //         limit,
+    //         totalPages,
+    //     }
+    // }
 
     getUserById(id: string): User {
         return this.users.find(user => user.id === id);
     }
 
-    createUser(createUserDto: CreateUserDto): User {
-        const newUser = {id: uuidv4(), role: 'Player', status: 'Active', ...createUserDto};
-        this.users.push(newUser);
-        return newUser;
-    }
+    // createUser(createUserDto: CreateUserDto): User {
+    //     const newUser = {id: uuidv4(), role: 'Player', status: 'Active', ...createUserDto};
+    //     this.users.push(newUser);
+    //     return newUser;
+    // }
 
     updateUser(id: string, updateUserDto: UpdateUserDto): User {
         const userIndex = this.users.findIndex(user => user.id === id);
