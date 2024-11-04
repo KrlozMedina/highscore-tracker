@@ -2,128 +2,147 @@
 
 ## Índice
 
-## Índice
-
 - [Descripción del Proyecto](#descripción-del-proyecto)
 - [Objetivos del Proyecto](#objetivos-del-proyecto)
 - [Funcionalidades Principales](#funcionalidades-principales)
-  - [Para Jugadores](#para-jugadores)
-  - [Para Administradores](#para-administradores)
-  - [Funcionalidades Extras (Opcionales)](#funcionalidades-extras-opcionales)
-- [Tecnologías a Utilizar](#tecnologías-a-utilizar)
+    - [Para Jugadores](#para-jugadores)
+    - [Para Administradores](#para-administradores)
+- [Tecnologías a Implementar](#tecnologías-a-implementar)
+    - [Frontend](#frontend)
+    - [Backend](#backend)
+    - [Integraciones Opcionales](#integraciones-opcionales)
 - [Estructura del Proyecto](#estructura-del-proyecto)
-  - [Backend](#backend)
-  - [Frontend](#frontend)
 - [Endpoints del Proyecto](#endpoints-del-proyecto)
   - [Backend](#endpoints-del-backend)
   - [Frontend](#endpoints-del-frontend)
 - [Diagrama de la Base de Datos](#diagrama-de-la-base-de-datos)
+    - [MongoDB (Scores)](#mongodb-scores)
+    - [PostgreSQL (Usuarios)](#postgresql-usuarios)
+    - [Redis (Sesiones)](#redis-sesiones)
+    - [Relación entre Base de Datos](#relación-entre-base-de-datos)
 - [Workspaces](#workspaces)
-- [Fases del Proyecto](#fases-del-proyecto)
+    - [Workspaces del Proyecto](#workspaces-del-proyecto)
+    - [Beneficios de Usar Workspaces](#beneficios-de-usar-workspaces)
+    - [Configuración de Workspaces](#configuración-de-workspaces)
 - [Conclusión](#conclusión)
 - [Documentación de Origen](#documentación-de-origen)
 - [Contribuciones](#contribuciones)
 
 ## Descripción del Proyecto
 
-El proyecto **HighScore Tracker** es una aplicación web fullstack que permite gestionar y mostrar las puntuaciones (scores) de los jugadores de un videojuego en línea. Los jugadores podrán registrarse en la plataforma, iniciar sesión, y sus puntuaciones se registrarán automáticamente cuando jueguen. Las puntuaciones más altas se mostrarán en un ranking global. Los administradores podrán gestionar el contenido de las puntuaciones y usuarios desde un panel de administración.
+**HighScore Tracker** es una aplicación web fullstack diseñada para gestionar y visualizar las puntuaciones de los jugadores en videojuegos en línea. Los jugadores pueden registrarse en la plataforma, iniciar sesión y ver sus puntuaciones en tiempo real, que se actualizan automáticamente conforme juegan. Las puntuaciones más altas aparecen en un ranking global, permitiendo a los jugadores comparar su rendimiento. Los administradores, por su parte, cuentan con un panel de administración donde pueden gestionar los usuarios y sus puntuaciones de manera eficiente, manteniendo la precisión y confiabilidad del ranking.
 
 ## Objetivos del Proyecto
 
-- Desarrollar una plataforma web que permita registrar las puntuaciones de los jugadores de manera automática.
-- Proporcionar una interfaz donde los jugadores puedan visualizar sus puntuaciones y las de otros usuarios en tiempo real.
-- Implementar autenticación y autorización para jugadores y administradores.
-- Crear una interfaz de administración para gestionar usuarios, puntuaciones y el ranking global.
+- Desarrollar una plataforma web que permita el registro y visualización de las puntuaciones de los jugadores de manera automática.
+- Implementar una interfaz amigable que permita a los jugadores consultar sus puntuaciones y compararlas en un ranking global actualizado en tiempo real.
+- Crear un sistema de autenticación seguro para jugadores y administradores, que incluya opciones de registro mediante correo electrónico o redes sociales (OAuth, Google, GitHub).
+- Proveer un panel de administración donde los administradores puedan gestionar usuarios y puntuaciones, incluyendo opciones para editar, eliminar o bloquear cuentas, manteniendo así la integridad de la plataforma.
+- Mantener la escalabilidad del sistema utilizando tecnologías modernas tanto para el frontend como para el backend, así como bases de datos NoSQL y SQL para almacenar la información de manera eficiente.
 
-## Funcionalidades Principales
+## Funcionalidades del Proyecto
 
 ### Para Jugadores
 
-- **Registro y Autenticación**: Los jugadores podrán registrarse en la plataforma con su correo electrónico o mediante redes sociales (OAuth, Google, GitHub).
-- **Visualización de Puntuaciones**: Los jugadores podrán ver sus puntuaciones históricas y el ranking global de los mejores jugadores.
-- **Actualización Automática de Puntuaciones**: La plataforma recibirá puntajes en tiempo real desde la API del videojuego y los actualizará en la base de datos.
-- **Perfil de Usuario**: Los jugadores podrán editar su perfil y ver sus estadísticas de juego.
+- **Registro y Autenticación**: Los jugadores pueden registrarse en la plataforma con su correo electrónico o mediante redes sociales (OAuth, Google, GitHub).
+- **Visualización de Puntuaciones**: Acceso a un panel donde pueden ver sus puntuaciones en tiempo real, además del ranking global que muestra los mejores puntajes.
+- **Actualización Automática de Puntuaciones**: Las puntuaciones de los jugadores se registran automáticamente cuando juegan, permitiendo una visualización actualizada sin necesidad de intervención manual.
+- **Perfil de Usuario**: Los jugadores pueden ver y actualizar su perfil, además de consultar estadísticas de juego como puntuaciones máximas y promedios.
 
 ### Para Administradores
 
-- **Panel de Administración**: Los administradores podrán ver y gestionar las puntuaciones de todos los jugadores.
-- **Gestión de Usuarios**: Añadir, eliminar o bloquear jugadores.
-- **Gestión de Puntuaciones**: Eliminar puntuaciones erróneas o fraudulentas.
+- **Panel de Administración**: Los administradores tienen acceso a un panel de control para gestionar a todos los usuarios registrados y sus puntuaciones.
+- **Gestión de Usuarios**: Funcionalidad para añadir, editar, eliminar o bloquear usuarios, manteniendo la seguridad y confiabilidad de la plataforma.
+- **Gestión de Puntuaciones**: Opciones para visualizar, ordenar y filtrar puntuaciones, así como eliminar registros erróneos o sospechosos.
 
-### Funcionalidades Extras (Opcionales)
-
-- **Historial de Puntuaciones**: Ver un gráfico de evolución de las puntuaciones del jugador a lo largo del tiempo.
-- **Clasificaciones por Nivel o Rango**: Crear tablas de clasificación basadas en diferentes niveles o categorías del juego.
-- **Modo Multijugador**: Permitir comparar puntuaciones con amigos agregados.
-
-## Tecnologías a Utilizar
-
-### Frontend:
-
-- Next.js (React.js)
-- React-Bootstrap
-- Redux Toolkit
-- RTK Query
-
-### Backend:
-
-- Nest.JS
-- MongoDB con Mongoose
-- PostgreSQL
-- Redis
-- JWT (JSON Web Token)
-- bcrypt
-
-### Integraciones Opcionales:
-
-- OAuth2
-- Socket.io (Opcional)
-
-## Estructura del Proyecto
-
-### Backend
-
-El backend del proyecto se construye con NestJS para manejar las API y la lógica de negocio. Se utiliza MongoDB para gestionar la base de datos de puntuaciones, PostgreSQL para la autenticación y gestión de usuarios, y Redis para la gestión de sesiones.
-
-#### **Rutas de Usuario**:
-
-- **POST** `/api/v1/auth/register`: Registro de nuevos usuarios.
-- **POST** `/api/v1/auth/login`: Inicio de sesión de usuarios.
-- **GET** `/api/v1/users/profile/:userId`: Obtiene el perfil de un usuario.
-- **GET** `/api/v1/users/scores/:userId`: Obtiene las puntuaciones de un usuario.
-- **PUT** `/api/v1/users/profile/:userId`: Actualiza el perfil de un usuario.
-
-#### **Rutas de Puntuaciones**:
-
-- **POST** `/api/v1/scores/:userId`: Añade una puntuación nueva para un usuario.
-- **GET** `/api/v1/scores/leaderboard`: Lista las puntuaciones más altas en el ranking.
-
-#### **Rutas de Administración**:
-
-- **GET** `/api/v1/users/admin`: Obtiene todos los usuarios con permisos de administrador.
-- **PATCH** `/api/v1/users/admin/:userId`: Actualiza los permisos de un usuario.
-- **DELETE** `/api/v1/users/admin/:userId`: Elimina un usuario.
-- **DELETE** `/api/v1/users/admin/scores/:userId`: Elimina todas las puntuaciones de un usuario.
+## Tecnologías a Implementar
 
 ### Frontend
 
-La interfaz de usuario se construye con **Next.js** y se utiliza **Redux Toolkit** para gestionar el estado global de la aplicación. Además, se usa **React-Bootstrap** para diseñar la UI.
+- **Next.js (React.js)**: Framework de React que permite renderizado del lado del servidor, optimización de rutas, y facilita la creación de aplicaciones de alto rendimiento y SEO-friendly.
+- **React-Bootstrap**: Librería de componentes basada en Bootstrap, integrada en React, que simplifica la creación de interfaces de usuario responsivas y atractivas.
+- **Redux Toolkit**: Herramienta para la gestión del estado global de la aplicación, ideal para manejar el flujo de datos entre los diferentes componentes.
+- **Redux Persist**: Extensión de Redux que permite almacenar el estado global en el almacenamiento local del navegador, asegurando que la información se mantenga incluso después de cerrar o recargar la aplicación.
 
-#### **Pantallas**:
+### Backend
 
-- **Login**: Pantalla de inicio de sesión y registro de usuarios.
-- **Perfil del Jugador**: Permite al jugador ver y gestionar sus puntuaciones.
-- **Ranking Global**: Tabla de clasificación de jugadores con las puntuaciones más altas.
-- **Panel de Administración**: Gestión de usuarios y puntuaciones por parte del administrador.
+- **Nest.js**: Framework de Node.js que aprovecha TypeScript para crear aplicaciones escalables y estructuradas en módulos, ideal para APIs robustas y mantenibles.
+- **MongoDB con Mongoose**: Base de datos NoSQL para almacenar puntajes de usuarios y sus estadísticas. Mongoose facilita la interacción con MongoDB mediante modelos definidos en el esquema.
+- **PostgreSQL con Prisma**: Base de datos SQL que almacena información estructurada de los usuarios, Prisma facilita la comunicación entre Nest.js y PostgreSQL, y gestiona las consultas y validaciones de manera eficiente.
+- <font color="gray">**JWT (JSON Web Token)**: Estándar de autenticación segura que se utiliza para proteger el acceso a la aplicación. Permite la creación de sesiones de usuario sin necesidad de almacenar sesiones en el servidor.</font>
+- <font color="gray">**Bcrypt**: Librería para el cifrado seguro de contraseñas, garantizando que se almacenen de forma segura en la base de datos.</font>
+
+### Integraciones Opcionales
+
+- <font color='gray'> **OAuth2 (Google, GitHub)**: Protocolo de autorización que permite a los usuarios registrarse e iniciar sesión con sus cuentas de Google o GitHub, mejorando la accesibilidad y seguridad. </font>
+- <font color="gray">**Socket.io**: Librería para habilitar la comunicación en tiempo real entre el servidor y el cliente, ideal para actualizar los puntajes y el ranking sin necesidad de recargar la página.
+</font>
+
+## Estructura del Proyecto
+
+El proyecto está organizado en **packages**, que alberga tanto el **frontend** como el **backend**. 
+
+El **backend** está desarrollado en **NestJS** y contiene toda la lógica de negocio y las APIs. Su organización en módulos permite gestionar la autenticación, usuarios, y puntuaciones de forma separada, facilitando así la escalabilidad y mantenimiento del código. En la carpeta `src`, se encuentran los módulos: `auth`, que gestiona la autenticación; `user`, dedicado a la gestión de usuarios; y `score`, que se encarga de las puntuaciones, cada uno con su controlador, servicio y módulo correspondiente.
+
+Por otro lado, el **frontend** se construyó con **Next.js**. La estructura de la interfaz se organiza en la carpeta `app/`, mientras que los `components/` albergan elementos reutilizables, y el `store/` contiene la configuración de **Redux Toolkit**. Además, la carpeta `api` integra las conexiones a APIs, y hay secciones específicas para las páginas de puntuaciones, autenticación y usuarios.
+
+La carpeta **docs** contiene la documentación del proyecto, que incluye la documentación de Swagger en la carpeta `api`, y los datos iniciales para las bases de datos en la carpeta `data`. 
+
+En la raíz del proyecto se encuentra el archivo `docker-compose.yml`, que se utiliza para orquestar los contenedores de **Docker**, `.gitignore` para excluir archivos no deseados, y `package.json` que maneja las dependencias y scripts a nivel general. 
+
+Los archivos de configuración de **Docker** y **docker-compose** permiten contenerizar el proyecto, definiendo los contenedores necesarios para **MongoDB**, **PostgreSQL** y **Redis**, asegurando una configuración homogénea en todos los entornos.
+
+```plaintext
+Estructura del Proyecto
+├── packages
+│   ├── backend
+│   │   ├── prisma
+│   │   ├── src
+│   │   │   ├── modules
+│   │   │   │   ├── auth
+│   │   │   │   ├── user
+│   │   │   │   └── score
+│   │   ├── test
+│   │   └── Dockerfile
+│   └── frontend
+│       ├── components
+│       ├── app
+│       │   ├── api
+│       │   │   ├── v1
+│       │   │   │   ├── auth
+│       │   │   │   │   ├── login
+│       │   │   │   │   └── register
+│       │   │   │   ├── scores
+│       │   │   │   │   └── leaderboard
+│       │   │   │   └── users
+│       │   │   │   │   ├── admin
+│       │   │   │   │   │   └── scores
+│       │   │   │   │   ├── profile
+│       │   │   │   │   └── scores
+│       │   ├── auth
+│       │   │   ├── login
+│       │   │   └── register
+│       │   ├── scores
+│       │   │   └── leaderboard
+│       │   └── users
+│       │   │   ├── admin
+│       │   │   │   └── scores
+│       │   │   ├── profile
+│       │   │   └── scores
+│       └── store
+├── docs
+│   ├── api
+│   └── data
+└── docker-compose.yml
+```
 
 ## Endpoints del Proyecto
 
 ### Endpoints del Backend
 
 #### **Base URL**
-
-- [http://localhost:3001/api/v1/](http://localhost:3001/api/v1/)
-- [http://172.10.10.1:3001/api/v1/](http://172.10.10.1:3001/api/v1/)
+- [http://localhost:3001/api/v1](http://localhost:3001/api/v1)
+- [http://127.0.0.1:3001/api/v1](http://172.10.10.1:3001/api/v1)
 
 #### Authentication
 
@@ -171,7 +190,7 @@ La interfaz de usuario se construye con **Next.js** y se utiliza **Redux Toolkit
         - **Summary:** Get user profile
         - **Description:** Get detail of user profile by ID
         - **Path Parameters:**
-            - `userId`: The ID that need to be fetched
+            - `userId`: The ID that needs to be fetched
         - **Responses:**
             - **200:** User data uploaded successfully
             - **401:** Unauthorized
@@ -182,7 +201,7 @@ La interfaz de usuario se construye con **Next.js** y se utiliza **Redux Toolkit
         - **Summary:** Update profile user
         - **Description:** Update profile user by ID
         - **Path Parameters:**
-            - `userId`: The ID that need to be fetched
+            - `userId`: The ID that needs to be fetched
         - **Request Body:**
         ```json
         {
@@ -204,7 +223,7 @@ La interfaz de usuario se construye con **Next.js** y se utiliza **Redux Toolkit
         - **Summary:** Get scores
         - **Description:** Get scores of user by user ID
         - **Path Parameters:**
-            - `userId`: The ID that need to be fetched
+            - `userId`: The ID that needs to be fetched
         - **Query Parameters:**
             - `page`: Actual page (default: 1)
             - `limit`: Number of elements per page (default: 10)
@@ -246,79 +265,284 @@ La interfaz de usuario se construye con **Next.js** y se utiliza **Redux Toolkit
 
 ### Endpoints del Frontend
 
-El frontend se comunica con el backend a través de las API mencionadas anteriormente, usando **RTK Query** para realizar solicitudes a los endpoints y gestionar el estado de los datos.
+El frontend se comunica con el backend a través de las API mencionadas anteriormente, utilizando **Redux Toolkit** para realizar las solicitudes a los endpoints y gestionar el estado de los datos. Los endpoints del frontend son los siguientes:
 
-### Diagrama de la Base de Datos
+#### Base URL
 
-Aquí se muestra un diagrama simple que ilustra la estructura de la base de datos, incluyendo las relaciones entre las colecciones y los atributos principales.
+- [http://localhost:3000/](http://localhost:3000/)
+- [http://127.0.0.1:3000/](http://127.0.0.1:3000/)
+
+#### Authentication
+- **Register**: `/auth/register`
+- **Login**: `/auth/login`
+
+#### Scores
+- **Registrar score**: `/scores/:userId`
+- **Los mejores puntajes**: `/scores/leaderboard`
+
+#### Users
+- **Obtener datos de los usuarios**: `/users/admin` (permitiendo habilitar, deshabilitar o bloquear usuarios)
+- **Obtener los scores de los usuarios**: `/users/admin/scores` (permitiendo eliminarlos)
+- **Mostrar los datos del usuario**: `/users/profile/:userId`
+- **Mostrar los scores por usuario**: `/users/scores/:userId`
+
+## Diagrama de la Base de Datos
+
+### MongoDB (Scores)
+
+| Campo      | Tipo      | Descripción                       |
+|------------|-----------|-----------------------------------|
+| scoreId    | UUID      | Identificador único de la puntuación |
+| userId     | UUID      | Referencia al usuario que obtuvo la puntuación |
+| game       | String    | Nombre del juego                  |
+| score      | Number    | Valor de la puntuación obtenida   |
+| createdAt  | DateTime  | Fecha de creación de la puntuación |
+| updatedAt  | DateTime  | Última actualización de la puntuación |
+
+### PostgreSQL (Usuarios)
+
+| Campo       | Tipo       | Descripción                         |
+|-------------|------------|-------------------------------------|
+| userId      | UUID       | Identificador único de usuario      |
+| name        | String     | Nombre de usuario                   |
+| username    | String     | Nickname de usuario                 |
+| email       | String     | Correo electrónico                  |
+| password    | String     | Contraseña (almacenada de manera segura) |
+| role        | String     | Rol del usuario (jugador, administrador) |
+| status      | String    | Estado activo/inactivo del usuario |
+| avatar      | String     | URL del avatar del usuario         |
+| createdAt   | DateTime       | Fecha de creación del usuario      |
+| updatedAt   | DateTime       | Última actualización del usuario   |
+
+### Redis (Sesiones)
+<font color='gray'> 
+Redis se utiliza para la gestión de sesiones, almacenando información temporal de autenticación y control de sesiones activas para una experiencia de usuario sin interrupciones.
+</font>
+
+### Relación entre Base de Datos
+
+Aquí se muestra un diagrama simple que ilustra las relaciones entre las colecciones y los atributos principales.
 
 ```plaintext
-+---------------+       +----------------+
-|    Users      |       |     Scores     |
-+---------------+       +----------------+
-| _id           |<----- | _id            |
-| name          |       | userId         |
-| username      |       | score          |
-| email         |       | gameId         |
-| password      |       | date           |
-| role          |       +----------------+
-| status        |
++---------------+        +----------------+
+|    Users      |        |     Scores     |
++---------------+        +----------------+
+| _id           |        | scoreId        |
+| userId        | <----- | userId         |
+| name          |        | userId         |
+| username      |        | score          |
+| email         |        | gameId         |
+| password      |        | createdAt      |
+| role          |        | updatedAt      |
+| status        |        +----------------+
+| avatar        |       
+| createdAt     |       
+| updatedAt     |       
 +---------------+
 ```
 
+#### Relaciones
+- Un User puede tener múltiples Scores (relación uno a muchos).
+- Un Score está asociado a un único User (relación muchos a uno).
+- Un Score puede estar asociado a un único Game (si decides incluir la entidad Game).
+
+Cada una de estas bases de datos tiene una función específica, contribuyendo a la separación lógica de datos y facilitando el escalado del proyecto.
+
+
+Esta sección ahora presenta una descripción completa de la estructura de la base de datos, así como un diagrama claro que muestra las relaciones entre las colecciones. Si necesitas realizar más ajustes o agregar información, no dudes en decírmelo.
+
 ## Workspaces
 
-El proyecto está configurado como un **monorepo** usando **pnpm workspaces** para gestionar tanto el frontend como el backend en un solo repositorio. Los workspaces permiten compartir dependencias y scripts entre ambas partes del proyecto.
+Los **workspaces** son entornos de desarrollo organizados donde los equipos pueden colaborar en proyectos. En este contexto, se han establecido diferentes workspaces para facilitar el trabajo en las distintas áreas del proyecto, asegurando una estructura clara y la separación de responsabilidades.
 
-### Configuración de Workspaces:
+### Workspaces del Proyecto
 
-1. **Root `package.json`**:
+El proyecto se organiza en varios workspaces, cada uno dedicado a una funcionalidad específica o a un módulo del sistema. A continuación, se describe la organización de los workspaces utilizados:
 
-```json
-{
-  "name": "highscore-tracker",
-  "private": true,
-  "scripts": {
-    "dev": "pnpm run -r dev"
-  },
-  "workspaces": ["frontend", "backend"]
-}
-```
 
-2. **Frontend (packages/frontend):**
+- **Frontend**
+  - Ubicación: `packages/frontend`
+  - Descripción: Este workspace contiene toda la lógica y los componentes de la interfaz de usuario. Se utiliza **Next.js** como framework y **Redux Toolkit** para la gestión del estado.
 
-```json
-{
-  "name": "frontend",
-  "scripts": {
-    "dev": "next dev"
-  }
-}
-```
+- **Backend**
+  - Ubicación: `packages/backend`
+  - Descripción: Este workspace alberga la lógica del servidor, las APIs y la interacción con la base de datos. Se ha implementado **NestJS** como framework principal para el desarrollo del backend.
 
-3. **Backend (packages/backend):**
+- **Base de Datos**
+  - Descripción: Aunque la base de datos no es un workspace en sí, su configuración y gestión se realizan en el contexto de los workspaces de frontend y backend. MongoDB se utiliza para almacenar las puntuaciones, mientras que PostgreSQL gestiona los datos de usuario.
 
-```json
-{
-  "name": "backend",
-  "scripts": {
-    "start": "nest start"
-  }
-}
-```
+### Beneficios de Usar Workspaces
 
-## Fases del Proyecto
+- **Organización**: Permite mantener el código de frontend y backend separado, facilitando la navegación y la colaboración.
+- **Colaboración**: Los equipos pueden trabajar simultáneamente en diferentes aspectos del proyecto sin interferir unos con otros.
+- **Escalabilidad**: Facilita la incorporación de nuevos módulos o funcionalidades sin complicar la estructura existente.
 
-1. **Configuración del Proyecto**: Crear repositorio, configurar entornos de desarrollo y workspaces.
-2. **Desarrollo del Backend**: Crear modelos de datos, rutas API y lógica de autenticación.
-3. **Desarrollo del Frontend**: Implementar componentes, conectarlos al estado global con Redux Toolkit y consumir las API.
-4. **Pruebas y Deploy**: Realizar pruebas, corregir errores, y desplegar el proyecto.
-5. **Extensiones Opcionales**: Integrar WebSockets y optimizar la experiencia de usuario.
+### Configuración de Workspaces
 
+Para iniciar y trabajar en los diferentes workspaces, asegúrate de tener las herramientas necesarias instaladas. La configuración básica incluye:
+
+1. **Instalación de Dependencias**:
+    ```bash
+    cd packages/backend
+    pnpm install
+    ```
+
+    ```bash
+    cd packages/frontend
+    pnpm install
+    ```
+
+2. **Ejecutar el proyecto**
+
+    ```bash
+    pnpm dev
+    ```
+
+3. **Configurar base de datos en Docker**
+
+    1. **Abrir la Terminal en la Raíz del Proyecto**
+
+    2. **Configurar la Base de Datos de MongoDB**
+
+        Ejecuta los siguientes comandos para inicializar y configurar MongoDB:
+
+        ```bash
+        docker compose up -d
+        ```
+
+        Accede al contenedor de MongoDB:
+
+        ```bash
+        docker exec -it mongodb mongosh
+        ```
+
+        Luego, en el entorno mongosh, ingresa los siguientes comandos para crear una base de datos y un usuario:
+
+        ```bash 
+        use admin
+        ```
+
+        ```bash
+        db.auth('root', 'root')
+        ```
+
+        ```bash
+        db = db.getSiblingDB('bootcamp')
+        ```
+
+        ```bash
+        db.createUser({
+            user: 'bootcampuser',
+            pwd: 'bootcamppass',
+            roles: [{
+                role: 'dbOwner',
+                db: 'bootcamp'
+            }]})
+        ```
+
+        ```bash
+        exit
+        ```
+
+        Crear el archivo `.env` para guardar las variables de entorno
+
+        ```env
+        MONGODB_URI=mongodb://bootcampuser:bootcamppass@localhost:27017/bootcamp
+        ```
+
+    3. **Importar Datos a MongoDB**
+
+        Ejecuta el siguiente comando para importar los datos desde `data/scores.json`:
+
+        ```bash
+        docker exec -i mongodb sh -c "mongoimport -c scores -d bootcamp -u bootcampuser -p bootcamppass --jsonArray --drop" < docs/data/scores.json
+        ```
+
+    4. **Configurar la Base de Datos de PostgreSQL**
+
+        Navega a la carpeta del backend:
+
+        ```bash
+        cd packages/backend/
+        ```
+
+        Ejecuta la migración inicial con Prisma para crear las tablas en PostgreSQL:
+
+        ```bash
+        pnpx prisma migrate dev —name init
+        ```
+
+        Regresa a la raíz del proyecto:
+
+        ```bash
+        cd ../../
+        ```
+
+    5. **Ejecutar el Proyecto**
+
+        Inicia el proyecto con el siguiente comando:
+
+        ```bash
+        pnpm dev
+        ```
+
+    6. **Importar Datos a la Base de Datos de PostgreSQL**
+
+        1. Abre el aplicativo pgAdmin 4.
+        2. Registra el servidor PostgreSQL.
+            - En la pestaña `General`, ingresa un nombre, por ejemplo: `bootcamp`
+
+            ![alt text](assets/image.png)
+
+        3. En la pestaña Connection, ingresa los siguientes datos:
+
+            - Hostname: `localhost`
+            - Username: `bootcampuser`
+            - Password: `bootcamppass`
+
+            ![alt text](assets/image-1.png)
+
+    7. **Importar Archivo CSV en PostgreSQL**
+
+        1. Busca la tabla `user` en pgAdmin 4.
+
+        2. Haz clic derecho en la tabla `user` y selecciona `Import/Export Data....`
+
+        3. Selecciona el archivo `users.csv` que está en la carpeta `data`.
+
+        4. Configura el formato como `csv` y el encoding como `UTF8`.
+
+        ![alt text](assets/image-2.png)
 
 ## Conclusión
 
-Este proyecto de gestión de puntuaciones permite a los jugadores ver sus resultados y participar en clasificaciones, lo que hace la experiencia de juego más competitiva y entretenida. Además, permite a los administradores mantener una supervisión constante para asegurar la legitimidad de las puntuaciones.
+El desarrollo del sistema de gestión de puntuaciones para videojuegos ha sido un viaje significativo que ha abarcado múltiples disciplinas del desarrollo de software, desde la planificación inicial hasta el despliegue y mantenimiento. A través de este proyecto, hemos logrado varios hitos clave que han contribuido a su éxito:
+
+### Logros Clave
+
+- **Integración de Tecnologías:** La combinación de **Next.js** para el frontend, **NestJS** para el backend, y bases de datos como **MongoDB** y **PostgreSQL** ha permitido crear un sistema robusto y escalable que se adapta a las necesidades de los usuarios.
+- **Gestión Eficiente del Estado:** La implementación de **Redux Toolkit** ha mejorado significativamente la gestión del estado en el frontend, facilitando la comunicación entre componentes y asegurando una experiencia de usuario fluida.
+- **Documentación Completa:** La creación de documentación detallada, incluyendo la definición de la API y diagramas de la base de datos, ha proporcionado una guía clara tanto para desarrolladores actuales como para futuros colaboradores.
+
+### Aprendizajes
+
+A lo largo del proyecto, hemos adquirido valiosas lecciones:
+
+- **Importancia de la Planificación:** La planificación detallada en las primeras fases del proyecto permitió identificar y mitigar riesgos antes de que se convirtieran en problemas mayores.
+- **Adaptabilidad y Flexibilidad:** A medida que el proyecto avanzaba, fue esencial adaptarse a nuevos requerimientos y cambios, lo que demostró la importancia de mantener una mentalidad abierta y flexible durante el desarrollo.
+- **Colaboración y Comunicación:** La colaboración efectiva entre los miembros del equipo y la comunicación constante con los stakeholders fueron fundamentales para el éxito del proyecto.
+
+### Visión Futura
+
+De cara al futuro, existen varias oportunidades para mejorar y expandir el sistema:
+
+- **Nuevas Funcionalidades:** Se pueden explorar nuevas características, como la integración con plataformas de juegos en línea, mejoras en la gestión de usuarios, y la incorporación de análisis de datos para ofrecer a los administradores información sobre el uso del sistema.
+- **Escalabilidad:** A medida que la base de usuarios crezca, se deberá considerar la escalabilidad del sistema para manejar un mayor volumen de datos y tráfico.
+- **Mantenimiento y Actualización:** Es fundamental establecer un plan de mantenimiento a largo plazo que garantice la seguridad del sistema y la actualización regular de tecnologías y dependencias.
+
+### Cierre
+
+En resumen, el proyecto de gestión de puntuaciones para videojuegos no solo ha sido una experiencia de aprendizaje enriquecedora, sino que también ha dado lugar a un producto funcional que satisface las necesidades de los usuarios. Agradecemos a todos los involucrados por su apoyo y dedicación, y esperamos ver cómo este sistema puede evolucionar y mejorar en el futuro.
 
 ## Documentación de Origen
 
@@ -333,7 +557,7 @@ La información y parámetros para el desarrollo del proyecto fueron obtenidos d
 
 Si deseas contribuir a este proyecto, por favor sigue los siguientes pasos:
 
-1. Haz un fork del repositorio.
+1. Haz un fork del repositorio `https://github.com/KrlozMedina/highscore-tracker.git`.
 2. Crea una nueva rama (`git checkout -b feature/nueva-caracteristica`).
 3. Realiza tus cambios y haz un commit (`git commit -m 'Añadir nueva característica'`).
 4. Envía un pull request.

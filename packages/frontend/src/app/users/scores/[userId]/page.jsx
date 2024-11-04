@@ -1,14 +1,34 @@
 "use client";
 
 // import withAuth from "gsm/hoc/with-auth";
-import { Col, Container, ListGroup, Row, Table } from "react-bootstrap";
+import { Container, Table } from "react-bootstrap";
 import { useGetScoreByIdQuery } from "hst/store/services/scores.api";
 import { Danger, Warning } from "hst/components/atoms/Message";
 import Loading from "hst/components/atoms/Loading";
+import LimitChange from "hst/components/atoms/LimitChange";
+import { useEffect, useState } from "react";
+import Pag from "hst/components/atoms/Pagination";
 
 export default function ScoresList({params}) {
-    // console.log(params)
-    const { data, error, isLoading } = useGetScoreByIdQuery(params.userId);
+    const [limit, setLimit] = useState(10)
+    const [page, setPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(0)
+    
+    const { data, error, isLoading } = useGetScoreByIdQuery([params.userId, limit, page]);
+    
+    useEffect(() => {
+        !isLoading && setTotalPages(data.totalPages)
+    }, [data])
+
+    const handleLimitChange = (e) => {
+        setLimit(Number(e.target.value));
+        setPage(1);
+    };
+
+    const handlePageChange = (newPage) => {
+        page < totalPages && setPage(newPage)
+    };
+
     return (
         <Container>
             <h2>Puntajes por Usuario</h2>
@@ -17,7 +37,8 @@ export default function ScoresList({params}) {
                 isLoading ? <Loading message='Cargando juegos' /> :
                 data.total === 0 ? <Warning message='No hay juegos para mostrar.' /> :
                 <div>
-                    <h3>{data.username}</h3>
+                    {/* <h3>{data.data.username}</h3> */}
+                    <LimitChange limit={limit} onChange={handleLimitChange} />
                     <Table>
                         <thead>
                         <tr>
@@ -27,13 +48,16 @@ export default function ScoresList({params}) {
                         </tr>
                         </thead>
                         <tbody>
-                            <tr key={data.id}>
-                            <td>1</td>
-                            <td>{data.game}</td>
-                            <td>{data.score}</td>
-                            </tr>
+                            {data.data.map((score, index) => (
+                                <tr key={index}>
+                                    <td>{index + 1}</td>
+                                    <td>{score.game}</td>
+                                    <td>{score.score}</td>
+                                </tr>
+                            ))}
                         </tbody>
                     </Table>
+                    <Pag onClick={handlePageChange} page={page} totalPages={totalPages} />
                 </div>
             }
         </Container>

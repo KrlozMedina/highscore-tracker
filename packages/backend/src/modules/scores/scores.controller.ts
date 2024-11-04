@@ -1,8 +1,7 @@
 import { Controller, Get, Post, Query, Body, Param, HttpCode, Delete, Put, HttpStatus} from '@nestjs/common';
-import { ScoresService, Score } from './scores.service';
+import { ScoresService } from './scores.service';
 import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto';
 import { CreateScoreDto, UpdateScoresDto } from './dto/create-score.dto';
-import { ScoreDto } from './dto/score.dto';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Scores } from './scores.schema';
 
@@ -13,8 +12,8 @@ export class ScoreController {
 
     @Get()
     @ApiOperation({ summary: 'Get all scores for a score' })
-    async getAllScores(): Promise<Scores[]> {
-        return this.scoreService.getScores();
+    async getScoresByAdmin(@Query() paginationQuery: PaginationQueryDto) {
+        return this.scoreService.getScoresByAdmin(paginationQuery);
     }
 
     @Get('/leaderboard')
@@ -51,30 +50,29 @@ export class ScoreController {
     async deleteScore(@Param('scoreId') scoreId: string) {
         return this.scoreService.deleteScore(scoreId);
     }
-
-    // @Post('/:id')
-    // createScore(@Body() createScoreDto: CreateScoreDto): ScoreDto{
-    //     return this.scoreService.createScore(createScoreDto);
-    // }
 }
 
-@Controller('users/admin/scores')
+@ApiTags('Users')
+@Controller('users')
 export class ScoresByAdmin {
-    constructor (private readonly scoreService: ScoresService) {}
+    constructor(private readonly scoreService: ScoresService) {}
 
-    @Get()
-    getScores(@Query() paginationQuery: PaginationQueryDto) {
-        return this.scoreService.getAllScores(paginationQuery);
+    @Get('scores/:userId')
+    @ApiOperation({summary: 'Get scores', description: 'Get scores of user by user ID', operationId: 'scores'})
+    @ApiResponse({status: 200, description: 'User data uploaded successfully'})
+    @ApiResponse({status: 400, description: 'User bad request'})
+    @ApiResponse({status: 401, description: 'Unauthorized'})
+    async getScoresByUserId(@Param('userId') userId: string, @Query() paginationQuery: PaginationQueryDto) {
+        return this.scoreService.getScoreByUserId(userId, paginationQuery)
     }
 
-    @Get(':userId')
-    getScoreById(@Param('userId') id: string): Score | undefined {
-        return this.scoreService.getAllScoresByUserId(id);
-    }
-
-    @Delete(':userId')
-    @HttpCode(204)
-    deleteScore(@Param('userId') id: string): void {
-        this.scoreService.deleteScoreById(id);
+    @Delete('admin/scores/:scoreId')
+    @ApiOperation({summary: 'Delete specific score', description: 'Delete specific score by admin'})
+    @ApiResponse({status: 200, description: 'Score removed successfully'})
+    @ApiResponse({status: 400, description: 'User bad request'})
+    @ApiResponse({status: 401, description: 'Unauthorized'})
+    @ApiResponse({status: 403, description: 'Valid token, no permission for this action'})
+    async deleteScoreByAdmin(@Param('scoreId') scoreId: string) {
+        return this.scoreService.deleteScore(scoreId)
     }
 }

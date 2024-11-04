@@ -1,13 +1,12 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { faker } from '@faker-js/faker';
-import { v4 as uuidv4 } from 'uuid';
-import { CreateUserDto } from './dto/create-user.dto';
+// import { da, faker, tr } from '@faker-js/faker';
+// import { v4 as uuidv4 } from 'uuid';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto';
 import { PaginatorDto } from '../scores/dto/paginator.dto';
 import { ScoreDto } from '../scores/dto/score.dto';
-import { PaginatorScoreDto } from '../scores/dto/paginatorScore.dto';
 import { PrismaService } from 'prisma/prisma.service';
+import { trace } from 'console';
 export interface User {
     id: string;
     email: string;
@@ -35,80 +34,137 @@ export class UsersService {
     private users: User[] = [];
     private scores: ScoreDto[] = [];
 
-    private generateMockData() {
-        for (let i = 0; i < 100; i++) {
-            this.users.push({
-                id: uuidv4(),
-                name: faker.company.name(),
-                email: faker.internet.email(),
-                username: faker.internet.userName(),
-                role: 'Player',
-                avatar: faker.image.avatar(),
-                status: 'Active'
-            })
-        }
-    }
+    // private generateMockData() {
+    //     for (let i = 0; i < 100; i++) {
+    //         this.users.push({
+    //             id: uuidv4(),
+    //             name: faker.company.name(),
+    //             email: faker.internet.email(),
+    //             username: faker.internet.userName(),
+    //             role: 'Player',
+    //             avatar: faker.image.avatar(),
+    //             status: 'Active'
+    //         })
+    //     }
+    // }
 
-    async getAllUsers() {
-        return this.prismaService.user.findMany();
+    async getAllUsers(paginationQuery: PaginationQueryDto) {
+        const users = await this.prismaService.user
+        .findMany()
+        .then(data => {return data})
+
+        const { limit = 10, page = 1 } = paginationQuery;
+        const start = (page - 1) * limit;
+        const end = Number(start) + Number(limit);
+    
+        const data = users.slice(start, end);
+        const total = users.length;
+        const totalPages = Math.ceil(total / limit);
+
+        if (!users) {
+            throw new NotFoundException('Score not found');
+        }
+
+        return <PaginatorDto> {
+            data,
+            total,
+            page,
+            limit,
+            totalPages,
+        }  
     }
 
     async getUserByUserId(userId: string) {
         const user = await this.prismaService.user.findUnique({
             where: { userId: userId },
             select: {
-                userId: true,
                 name: true,
-                email: true
+                username: true,
+                email: true,
+                roles: true,
+                avatar: true,
+                status: true
             },
         });
 
         if (!user) {
-            throw new NotFoundException('Score not found');
+            throw new NotFoundException('User not found');
         }
 
         return user;
     }
 
-    createUser(userDto: CreateUserDto) {
-        return this.prismaService.user.create({data: userDto});
+    async updateUser(userId: string, updateUserDto: UpdateUserDto) {        
+        const user = await this.prismaService.user.update({
+            where: { userId: userId },
+            data: updateUserDto
+        })
+
+        if (!user) {
+            throw new NotFoundException('User not updated');
+        }
+
+        return user;
     }
 
-    // getAllUsers(paginationQuery: PaginationQueryDto): Paginator {
-    //     const { page = 1, limit = 10 } = paginationQuery;        
-    //     const start = (page - 1) * limit;
-    //     const end = Number(start) + Number(limit);
+    async enableUser(userId: string) {
+        const date = new Date();
+        var newStatus = '';
 
-    //     const data = this.users.slice(start, end);
-    //     const total = this.users.length;
-    //     const totalPages = Math.ceil(total / limit);
+        const userStatus = await this.prismaService.user.findUnique({
+            where: {userId: userId},
+            select: {status: true}
+        })
 
-    //     return <Paginator>{
-    //         data,
-    //         total,
-    //         page,
-    //         limit,
-    //         totalPages,
-    //     }
-    // }
+        if (userStatus.status==='active') {
+            newStatus = 'inactive'
+        } else if (userStatus.status!=='active') {
+            newStatus = 'active'
+        }
+
+        const user = await this.prismaService.user.update({
+            where: { userId: userId },
+            data: { updatedAt: date.toISOString(), status: newStatus},
+            select: {
+                name: true,
+                username: true,
+                email: true,
+                avatar: true,
+                roles: true,
+                status: true
+            }
+        })
+
+        if (!user) {
+            throw new NotFoundException('User not updated');
+        }
+
+        return user;
+    }
+
+    async lockUser(userId: string) {
+        const date = new Date();
+        const user = await this.prismaService.user.update({
+            where: { userId: userId },
+            data: { updatedAt: date.toISOString(), status: 'lock' },
+            select: {
+                name: true,
+                username: true,
+                email: true,
+                avatar: true,
+                roles: true,
+            }
+        })
+
+        if (!user) {
+            throw new NotFoundException('User not updated');
+        }
+
+        return user;
+    }
 
     getUserById(id: string): User {
         return this.users.find(user => user.id === id);
-    }
-
-    // createUser(createUserDto: CreateUserDto): User {
-    //     const newUser = {id: uuidv4(), role: 'Player', status: 'Active', ...createUserDto};
-    //     this.users.push(newUser);
-    //     return newUser;
-    // }
-
-    updateUser(id: string, updateUserDto: UpdateUserDto): User {
-        const userIndex = this.users.findIndex(user => user.id === id);
-        if (userIndex === -1) {
-            return null
-        }
-        this.users[userIndex] = {...this.users[userIndex], ...updateUserDto};
-        return this.users[userIndex];
     }
     
     deleteUser(id: string): void {
@@ -125,11 +181,11 @@ export class UsersService {
         const totalPages = Math.ceil(total / limit);
 
         return <PaginatorDto> {
-         data,
-         total,
-         page,
-         limit,
-         totalPages,
+            data,
+            total,
+            page,
+            limit,
+            totalPages,
         }   
     }
 }

@@ -19,14 +19,26 @@ export const usersApi = createApi({
                 body,
             })
         }),
+        enableUser: builder.mutation({
+            query: (userId) => ({
+                url: `users/admin/${userId}`,
+                method: 'PATCH'
+            })
+        }),
+        lockUser: builder.mutation({
+            query: (userId) => ({
+                url: `users/admin/${userId}`,
+                method: 'DELETE'
+            })
+        }),
         updateUser: builder.mutation({
-            query: (body) => ({
-                url: `users/profile/${body.id}`,
+            query: ([userId, body]) => ({
+                url: `users/profile/${userId}`,
                 method: 'PUT',
-                body,
+                body
             })
         })
     })
 })
 
-export const { useGetUsersQuery, useGetUserQuery, useCreateUserMutation, useUpdateUserMutation } = usersApi;
+export const { useGetUsersQuery, useGetUserQuery, useCreateUserMutation, useEnableUserMutation, useLockUserMutation, useUpdateUserMutation } = usersApi;
