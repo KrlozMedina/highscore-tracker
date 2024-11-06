@@ -10,7 +10,7 @@ export const scoresApi = createApi({
             query: ([userId, limit, page]) => `users/scores/${userId}?page=${page}&limit=${limit}`
         }),
         getLeaderBoard: builder.query({
-            query: () => 'scores/leaderboard'
+            query: ([limit, page]) => `scores/leaderboard?page=${page}&limit=${limit}`
         }),
         createScore: builder.mutation({
             query: (body) => ({

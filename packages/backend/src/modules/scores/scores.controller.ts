@@ -10,7 +10,7 @@ import { Scores } from './scores.schema';
 export class ScoreController {
     constructor(private scoreService: ScoresService){}
 
-    @Get('/leaderboard')
+    @Get('leaderboard')
     @ApiOperation({summary: 'Get better scores'})
     @ApiResponse({status: 200, description: 'Global scores uploaded successfully'})
     async getScores(@Query() paginationQuery: PaginationQueryDto) {
