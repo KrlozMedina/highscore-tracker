@@ -10,15 +10,11 @@ import { Scores } from './scores.schema';
 export class ScoreController {
     constructor(private scoreService: ScoresService){}
 
-    @Get()
-    @ApiOperation({ summary: 'Get all scores for a score' })
-    async getScoresByAdmin(@Query() paginationQuery: PaginationQueryDto) {
-        return this.scoreService.getScoresByAdmin(paginationQuery);
-    }
-
     @Get('/leaderboard')
-    getScores(@Query() paginationQuery: PaginationQueryDto) {
-        return this.scoreService.getAllScores(paginationQuery);
+    @ApiOperation({summary: 'Get better scores'})
+    @ApiResponse({status: 200, description: 'Global scores uploaded successfully'})
+    async getScores(@Query() paginationQuery: PaginationQueryDto) {
+        return this.scoreService.getBetterScores(paginationQuery);
     }
 
     @Get(':scoreId')

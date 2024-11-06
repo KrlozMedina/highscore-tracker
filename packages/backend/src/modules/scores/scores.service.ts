@@ -33,32 +33,6 @@ export class ScoresService {
     //     }
     // }
 
-    async getScoresByAdmin(paginationQuery: PaginationQueryDto) {
-        const scores = await this.scoresModel
-        .find()
-        .select({_id: 0, scoreId: 1, userId: 1,game: 1, score: 1})
-        .exec();
-
-        const { limit = 10, page = 1 } = paginationQuery;
-        const start = (page - 1) * limit;
-        const end = Number(start) + Number(limit);
-    
-        const data = scores.slice(start, end);
-        const total = scores.length;
-        const totalPages = Math.ceil(total / limit);
-
-        if (!scores) {
-            throw new NotFoundException('Score not found');
-        }
-
-        return <PaginatorDto> {
-            data,
-            total,
-            page,
-            limit,
-            totalPages,
-        }  
-    }
 
     async createScore(createScoreDto: CreateScoreDto) {
         const score = new this.scoresModel(createScoreDto);
@@ -119,18 +93,23 @@ export class ScoresService {
         }
     }
 
-    getBestScores(): Score[]  {
-        return this.scores;
-    }
+    async getBetterScores(paginationQuery: PaginationQueryDto) {
+        const scores = await this.scoresModel
+        .find()
+        .select({_id: 0, scoreId: 1, userId: 1,game: 1, score: 1})
+        .exec();
 
-    getAllScores(paginationQuery: PaginationQueryDto): PaginatorDto {
         const { limit = 10, page = 1 } = paginationQuery;
         const start = (page - 1) * limit;
         const end = Number(start) + Number(limit);
     
-        const data = this.scores.slice(start, end);
-        const total = this.scores.length;
+        const data = scores.slice(start, end);
+        const total = scores.length;
         const totalPages = Math.ceil(total / limit);
+
+        if (!scores) {
+            throw new NotFoundException('Score not found');
+        }
 
         return <PaginatorDto> {
             data,
@@ -138,7 +117,7 @@ export class ScoresService {
             page,
             limit,
             totalPages,
-        }   
+        }  
     }
 
     getAllScoresByUserId(id: string): Score {
