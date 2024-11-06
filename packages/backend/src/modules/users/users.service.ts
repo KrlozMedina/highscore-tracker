@@ -6,15 +6,19 @@ import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto';
 import { PaginatorDto } from '../scores/dto/paginator.dto';
 import { ScoreDto } from '../scores/dto/score.dto';
 import { PrismaService } from 'prisma/prisma.service';
-import { trace } from 'console';
+// import { trace } from 'console';
+import { hash, compare } from 'bcryptjs';
+
 export interface User {
     id: string;
     email: string;
     name: string;
     username: string;
-    role: string;
+    roles: string[];
+    // role: string;
     avatar: string;
     status: string;
+    password: string;
 }
 
 export interface Paginator {
@@ -47,6 +51,14 @@ export class UsersService {
     //         })
     //     }
     // }
+
+    validateUser(username: string, password: string) {
+        const user = this.users.find(user => user.username === username);
+        if (user && compare(password, user.password)) {
+            return user;
+        }
+        return null;
+    }
 
     async getAllUsers(paginationQuery: PaginationQueryDto) {
         const users = await this.prismaService.user
