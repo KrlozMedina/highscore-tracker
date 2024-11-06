@@ -1,10 +1,29 @@
+'use client'
+
 import Image from "next/image";
 import styles from "./page.module.css";
+import { useSelector, useDispatch } from "react-redux";
+import { selectCounter, setCounter } from "hst/store/slices/counter.slices";
 
 export default function Home() {
+  const counter = useSelector(selectCounter);
+  const dispatch = useDispatch();
+
+  const updateValue = () => {
+    dispatch(
+      setCounter({
+        counter: counter + 1
+      })
+    )
+  }
+
   return (
     <div className={styles.page}>
-      <main className={styles.main}>
+      <h1>Contador</h1>
+      {console.log(counter)}
+      {counter}
+      <button onClick={updateValue}>Aumentar</button>
+      {/* <main className={styles.main}>
         <Image
           className={styles.logo}
           src="https://nextjs.org/icons/next.svg"
@@ -89,7 +108,7 @@ export default function Home() {
           />
           Go to nextjs.org →
         </a>
-      </footer>
+      </footer> */}
     </div>
   );
 }

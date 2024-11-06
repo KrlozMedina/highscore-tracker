@@ -4,9 +4,9 @@ import LimitChange from 'hst/components/atoms/LimitChange';
 import Loading from 'hst/components/atoms/Loading';
 import { Danger, Warning } from 'hst/components/atoms/Message';
 import Pag from 'hst/components/atoms/Pagination';
-import { useDeleteScoreMutation, useGetAllScoresQuery, useGetScoreByIdQuery } from 'hst/store/services/scores.api';
+import { useDeleteScoreMutation, useGetAllScoresQuery } from 'hst/store/services/scores.api';
 import React, { useEffect, useState } from 'react';
-import { Container, Table, Button, Form } from 'react-bootstrap';
+import { Container, Table, Button } from 'react-bootstrap';
 
 const page = () => {
     const [page, setPage] = useState(1);
@@ -25,18 +25,16 @@ const page = () => {
     };
 
     const handlePageChange = (newPage) => {
-        page < totalPages && setPage(newPage)
+        page <= totalPages && setPage(newPage)
     };
 
     const handleDelete = (scoreId) => {
-        // console.log(scoreId)
         updateUser(scoreId)
     }
 
     return (
         <Container className="mt-5">
             <h2 className="mb-4">Puntuaciones de Todos los Jugadores</h2>
-            {/* {isLoading ? console.log(error) : console.log(data)} */}
             {
                 error !== undefined ? <Danger error={error} /> : 
                 isLoading ? <Loading message='Cargando usuarios' /> :
@@ -55,16 +53,16 @@ const page = () => {
                         </thead>
                         <tbody>
                             {data.data.map((score, index) => (
-                            <tr key={score.id}>
+                            <tr key={index}>
                                 <td>{index + 1 + (page * limit - limit)}</td>
-                                <td>{score.username || "N/A"}</td>
+                                <td>{score.userId || "N/A"}</td>
                                 <td>{score.game}</td>
                                 <td>{score.score.toLocaleString()}</td>
                                 <td>
                                 <Button
                                     variant="danger"
                                     size="sm"
-                                    onClick={() => handleDelete(score.id)}
+                                    onClick={() => handleDelete(score.scoreId)}
                                     href='scores'
                                 >
                                     Eliminar
@@ -74,12 +72,6 @@ const page = () => {
                             ))}
                         </tbody>
                     </Table>
-
-                    {/* <Pagination className="justify-content-center">
-                        <Pagination.Prev onClick={() => handlePageChange(page - 1)} disabled={page === 1} />
-                        <Pagination.Item active>{page}/{totalPages}</Pagination.Item>
-                        <Pagination.Next onClick={() => handlePageChange(page + 1)} />
-                    </Pagination> */}
 
                     <Pag onClick={handlePageChange} page={page} totalPages={totalPages} />
                 </div>

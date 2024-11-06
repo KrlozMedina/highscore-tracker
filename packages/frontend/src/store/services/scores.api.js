@@ -7,7 +7,7 @@ export const scoresApi = createApi({
     }),
     endpoints: (builder) => ({
         getScoreById: builder.query({
-            query: (userId) => `users/admin/scores/${userId}`
+            query: ([userId, limit, page]) => `users/scores/${userId}?page=${page}&limit=${limit}`
         }),
         getLeaderBoard: builder.query({
             query: () => 'scores/leaderboard'
@@ -26,7 +26,7 @@ export const scoresApi = createApi({
             })
         }),
         getAllScores: builder.query({
-            query: (pag) => `users/admin/scores?page=${pag.page}&limit=${pag.limit}`
+            query: (pag) => `scores?page=${pag.page}&limit=${pag.limit}`
         })
     })
 })

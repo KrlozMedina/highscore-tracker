@@ -1,7 +1,7 @@
-import { faker } from '@faker-js/faker';
+// import { faker } from '@faker-js/faker';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto';
-import { v4 as uuidv4 } from 'uuid';
+// import { v4 as uuidv4 } from 'uuid';
 import { CreateScoreDto, UpdateScoresDto } from './dto/create-score.dto';
 import { ScoreDto } from './dto/score.dto';
 import { PaginatorDto } from './dto/paginator.dto';
@@ -11,7 +11,6 @@ import { Model } from 'mongoose';
 
 export interface Score {
     id: string;
-    // username: string;
     game: string;
     score: number;
 }
@@ -34,8 +33,31 @@ export class ScoresService {
     //     }
     // }
 
-    async getScores(): Promise<Scores[]> {
-        return this.scoresModel.find().exec();
+    async getScoresByAdmin(paginationQuery: PaginationQueryDto) {
+        const scores = await this.scoresModel
+        .find()
+        .select({_id: 0, scoreId: 1, userId: 1,game: 1, score: 1})
+        .exec();
+
+        const { limit = 10, page = 1 } = paginationQuery;
+        const start = (page - 1) * limit;
+        const end = Number(start) + Number(limit);
+    
+        const data = scores.slice(start, end);
+        const total = scores.length;
+        const totalPages = Math.ceil(total / limit);
+
+        if (!scores) {
+            throw new NotFoundException('Score not found');
+        }
+
+        return <PaginatorDto> {
+            data,
+            total,
+            page,
+            limit,
+            totalPages,
+        }  
     }
 
     async createScore(createScoreDto: CreateScoreDto) {
@@ -54,6 +76,32 @@ export class ScoresService {
         return score;
     }
 
+    async getScoreByUserId(userId: string, paginationQuery: PaginationQueryDto) {
+        const score = await this.scoresModel
+        .find({userId: userId})
+        .select({_id: 0,scoreId: 1, game: 1, score: 1, createdAt: 1});
+        
+        const { limit = 10, page = 1 } = paginationQuery;
+        const start = (page - 1) * limit;
+        const end = start + limit;
+    
+        const data = score.slice(start, end);
+        const total = score.length;
+        const totalPages = Math.ceil(total / limit);
+
+        if (!score) {
+            throw new NotFoundException('Score not found');
+        }
+
+        return <PaginatorDto> {
+            data,
+            total,
+            page,
+            limit,
+            totalPages,
+        }  
+    }
+
     async updateScore(scoreId: string, updateScoreDto: UpdateScoresDto) {
     const updateScore = await this.scoresModel.updateOne(
         {scoreId: scoreId}, updateScoreDto);
@@ -64,11 +112,11 @@ export class ScoresService {
     return this.getScoreById(scoreId);
     }
 
-    async deleteScore(scoreId: string): Promise<void> {
-    const result = await this.scoresModel.findOneAndDelete({scoreId: scoreId}).exec();
-    if (!result) {
-        throw new NotFoundException('Score not found');
-    }
+    async deleteScore(scoreId: string): Promise<void> {        
+        const result = await this.scoresModel.findOneAndDelete({scoreId: scoreId}).exec();
+        if (!result) {
+            throw new NotFoundException('Score not found');
+        }
     }
 
     getBestScores(): Score[]  {
@@ -95,24 +143,5 @@ export class ScoresService {
 
     getAllScoresByUserId(id: string): Score {
         return this.scores.find(score => score.id == id);
-    }
-
-    // createScore(createScoreDto: CreateScoreDto): ScoreDto{
-    //     const newScore = {id: uuidv4(), ...createScoreDto};
-    //     this.scores.push(newScore);
-    //     return newScore;
-    // }
-
-    // updateScore(id: string, updateScoreDto: UpdateScoreDto): ScoreDto {
-    //     const userIndex = this.scores.findIndex(user => user.id === id);
-    //     if (userIndex === -1) {
-    //         return null
-    //     }
-    //     this.scores[userIndex] = {...this.scores[userIndex], ...updateScoreDto};
-    //     return this.scores[userIndex];
-    // }
-
-    deleteScoreById(id: string) {
-        this.scores = this.scores.filter(score => score.id !== id);
     }
 }

@@ -2,10 +2,10 @@
 
 import Loading from "hst/components/atoms/Loading";
 import { Danger, Warning } from "hst/components/atoms/Message";
-import withAuth from "hst/hoc/with-auth";
+// import withAuth from "hst/hoc/with-auth";
 import { useGetUserQuery, useUpdateUserMutation } from "hst/store/services/users.api";
 import { useEffect, useState } from "react";
-import { Container, Card, Button, Form, Spinner } from "react-bootstrap";
+import { Container, Card, Button, Form } from "react-bootstrap";
 
 export default function UserDetail({params}){
     const { data, error, isLoading } = useGetUserQuery(params.userId);
@@ -28,9 +28,8 @@ export default function UserDetail({params}){
 
     const handleSave = () => {
         isUpdating ? 'Updating...' : 
-        updateUser({id: params.userId, name, avatar, username, email})
+        updateUser([params.userId, {name, avatar, username, email}])
         .then(data => {
-            console.log(data)
             setIsEditing(!isEditing);
         })
         .catch(err => console.error(err))
@@ -87,7 +86,7 @@ export default function UserDetail({params}){
                             <Form.Control
                             type="text"
                             name="role"
-                            value={data.role}
+                            value={data.roles}
                             disabled
                             />
                         </Form.Group>
@@ -101,7 +100,7 @@ export default function UserDetail({params}){
                         <Card.Text>
                             <strong>Username:</strong> {username} <br />
                             <strong>Email:</strong> {email} <br />
-                            <strong>Role:</strong> {data.role}
+                            <strong>Role:</strong> {data.roles}
                         </Card.Text>
                         <Button variant="primary" onClick={handleEditToggle}>
                             Editar

@@ -6,7 +6,7 @@ const Pag = ({ onClick, page, totalPages }) => {
         <Pagination className="justify-content-center">
             <Pagination.Prev onClick={() => onClick(page - 1)} disabled={page === 1} />
             <Pagination.Item active>{page}/{totalPages}</Pagination.Item>
-            <Pagination.Next onClick={() => onClick(page + 1)} />
+            <Pagination.Next onClick={() => onClick(page + 1)} disabled={page === totalPages} />
         </Pagination>
     )
 }

@@ -1,7 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from '@reduxjs/toolkit/query/react'
+import { thunk } from "redux-thunk";
+import storage from 'redux-persist/lib/storage'
+import { combineReducers } from "@reduxjs/toolkit";
+import persistReducer from "redux-persist/es/persistReducer";
+import { usersApi } from "./services/users.api";
+import { scoresApi } from "./services/scores.api";
+import counterReducer from './slices/counter.slices';
 import {
-    persistStore,
     FLUSH,
     REHYDRATE,
     PAUSE,
@@ -10,25 +16,32 @@ import {
     REGISTER,
 } from 'redux-persist';
 
-import { usersApi } from "./services/users.api";
-import { scoresApi } from "./services/scores.api";
+const persistConfig = {
+    key: 'root',
+    storage: storage,
+    whitelist: ['counterState'],
+    timeout: 100
+}
+
+const rootReducer = combineReducers({
+    counterState: counterReducer,
+    [usersApi.reducerPath]: usersApi.reducer,
+    [scoresApi.reducerPath]: scoresApi.reducer
+})
+
+const persistedReducer = persistReducer(persistConfig, rootReducer)
 
 export const store = configureStore({
-    reducer: {
-        [usersApi.reducerPath]: usersApi.reducer,
-        [scoresApi.reducerPath]: scoresApi.reducer
-    },
+    reducer: persistedReducer,
     middleware: (getDefaultMiddleware) => 
         getDefaultMiddleware({
             serializableCheck: {
                 ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
             },
         })
-        .concat([usersApi.middleware], [scoresApi.middleware])
+        .concat([usersApi.middleware], [scoresApi.middleware], [thunk])
 });
-
-const persistor = persistStore(store);
 
 setupListeners(store.dispatch)
 
-export {store, persistor};
+export {store};

@@ -1,8 +1,8 @@
 "use client";
 
-import withAuth from "hst/hoc/with-auth";
-import { Container, Table, Button, Spinner, Form, Pagination, Alert } from "react-bootstrap";
-import { useGetUsersQuery, useUpdateUserMutation } from "hst/store/services/users.api";
+// import withAuth from "hst/hoc/with-auth";
+import { Container, Table, Button } from "react-bootstrap";
+import { useGetUsersQuery, useEnableUserMutation, useLockUserMutation } from "hst/store/services/users.api";
 import { useEffect, useState } from "react";
 import Loading from "hst/components/atoms/Loading";
 import { Danger, Warning } from "hst/components/atoms/Message";
@@ -14,7 +14,8 @@ export default function PlayersList() {
     const [limit, setLimit] = useState(10)
     const [totalPages, setTotalPages] = useState(0)
     const { data, error, isLoading } = useGetUsersQuery({page, limit});
-    const [updateUser, { isUpdating }] = useUpdateUserMutation();
+    const [enableUser, { isUpdating }] = useEnableUserMutation();
+    const [lockUser] = useLockUserMutation();
 
     useEffect(() => {
         !isLoading && setTotalPages(data.totalPages)
@@ -27,19 +28,6 @@ export default function PlayersList() {
 
     const handlePageChange = (newPage) => {
         page < totalPages && setPage(newPage)
-    };
-
-    const handleToggleUserStatus = (id, status) => {
-        if (status !== 'Lock') {
-            status === 'Disable' && updateUser({id, status: 'Active'})
-            status === 'Active' && updateUser({id, status: 'Disable'})
-        } else {
-            updateUser({id, status: 'Active'})
-        }
-    };
-
-    const handleDeleteUser = (id, status) => {
-        status !== 'Lock' && updateUser({id, status: 'Lock'})
     };
 
     return (
@@ -65,24 +53,25 @@ export default function PlayersList() {
                         </thead>
                         <tbody>
                             {data.data.map((user, index) => (
-                                <tr key={user.id}>
+                                <tr key={index}>
                                     <td>{index + 1 + (page * limit - limit)}</td>
                                     <td><img src={user.avatar} alt="Avatar" width="40" height="40" /></td>
                                     <td>{user.name}</td>
                                     <td>{user.username}</td>
                                     <td>{user.email}</td>
-                                    <td>{user.role}</td>
+                                    <td>{user.roles}</td>
                                     <td>
                                         <Button 
-                                        variant={user.status==='Active' ? "warning" : "success"}
+                                        variant={user.status==='active' ? "warning" : "success"}
                                         href="/users/admin"
-                                        onClick={() => handleToggleUserStatus(user.id, user.status)}>
-                                            {user.status==='Active' ? "Desactivar" : "Activar"}
+                                        onClick={() => enableUser(user.userId)}>
+                                            {user.status==='active' ? "Desactivar" : "Activar"}
                                         </Button>
-                                        {user.status !== 'Lock' && 
-                                        <Button href="/users/admin" 
+                                        {user.status !== 'lock' && 
+                                        <Button
+                                        href="/users/admin" 
                                         variant="danger" 
-                                        onClick={() => handleDeleteUser(user.id, user.status)}>
+                                        onClick={() => lockUser(user.userId)}>
                                             Eliminar
                                         </Button>}
                                     </td>
