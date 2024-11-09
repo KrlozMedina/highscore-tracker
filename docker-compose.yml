@@ -1,32 +1,105 @@
 services:
+  # Servicio de la aplicación NestJS
+  app:
+    container_name: app
+    restart: always
+    build:
+      context: ./packages/backend
+      dockerfile: Dockerfile
+    ports:
+      - "3027:3001" #Puerto a mostrar:Puerto a usar internamente
+    environment:
+      DATABASE_URL: postgres://bootcampuser:bootcamppass@localhost:5432/highscore-tracker_db
+      MONGODB_URI: mongodb://bootcampuser:bootcamppass@localhost:27017/highscore-tracker_db
+      SECRET_KEY: p8mo&IV1}}X:7R}f.v@^b}Z725crkweCeUZgxO!z|@|tK3mZ3T<6<E"3_2`%C3m
+      REDIS_HOST: localhost
+      REDIS_PORT: 6379
+      JWT_EXPIRES_IN: 3600
+    depends_on:
+      - postgres
+      - mongo
+      - redis
+    networks:
+      - highscore-tracker
+  # Servicio de Postgres
+  postgres:
+    image: postgres:latest
+    container_name: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: bootcampuser
+      POSTGRES_PASSWORD: bootcamppass
+      POSTGRES_DB: highscore-tracker_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - highscore-tracker
+  # Servicio de MongoDB
   mongo:
     image: mongo:latest
     container_name: mongodb
     restart: always
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: root
+    command:
+      - '--logpath'
+      - '/var/log/mongodb/mongod.log'
     ports:
-      - 27017:27017
+      - "27017:27017"
     volumes:
-      - data:/data/db
-  postgresql:
-    image: postgres:latest
+      - mongo-data:/data/db
     environment:
-      POSTGRES_USER: bootcampuser
-      POSTGRES_PASSWORD: bootcamppass
-      POSTGRES_DB: bootcamp
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=root
+    networks:
+      - highscore-tracker
+  # Servicio de Redis
+  redis:
+    image: redis:alpine
+    container_name: redis
+    restart: always
     ports:
-      - "5432:5432"
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-  # nestjs:
-  #   build: 
-  #     context: ./packages/backend
-  #   container_name: scores
-  #   ports:
-  #     - '3000:3000'
+      - "6379:6379"
+    networks:
+      - highscore-tracker
 
 volumes:
-  data: {}
-  postgres_data:
+  postgres-data:
+  mongo-data:
+
+networks:
+  highscore-tracker:
+    driver: bridge
+
+# services:
+#   mongo:
+#     image: mongo:latest
+#     container_name: mongodb
+#     restart: always
+#     environment:
+#       MONGO_INITDB_ROOT_USERNAME: root
+#       MONGO_INITDB_ROOT_PASSWORD: root
+#     ports:
+#       - 27017:27017
+#     volumes:
+#       - data:/data/db
+#   postgresql:
+#     image: postgres:latest
+#     environment:
+#       POSTGRES_USER: bootcampuser
+#       POSTGRES_PASSWORD: bootcamppass
+#       POSTGRES_DB: bootcamp
+#     ports:
+#       - "5432:5432"
+#     volumes:
+#       - postgres_data:/var/lib/postgresql/data
+#   # nestjs:
+#   #   build: 
+#   #     context: ./packages/backend
+#   #   container_name: scores
+#   #   ports:
+#   #     - '3000:3000'
+
+# volumes:
+#   data: {}
+#   postgres_data:

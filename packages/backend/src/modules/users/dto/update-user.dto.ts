@@ -1,15 +1,18 @@
-import { ApiProperty } from "@nestjs/swagger";
+import { ApiProperty } from '@nestjs/swagger';
 
 export class UpdateUserDto {
-    @ApiProperty({description: 'Update email', example: "prueba@yopmail.com", required:false})
-    readonly email?: string;
-    
-    @ApiProperty({description: 'Update name', example: "Leidy Santos"})
-    readonly name?: string;
+  @ApiProperty({ example: 'Pepito Perez', description: 'Nombre del jugador' })
+  name?: string | null
 
-    @ApiProperty({description: 'Update username', example: 'LCSA'})
-    readonly username?: string;
-    
-    @ApiProperty({description: 'Update avatar', example: 'https://via.placeholder.com/150'})
-    readonly avatar?: string;
+  @ApiProperty({ example: 'Pepito Perez', description: 'Nombre del jugador' })
+  username?: string | null
+
+  // @ApiProperty({ example: 'Url o nombre del archivo', description: 'Imagen del jugador' })
+  // avatar?: string | null
+
+  @ApiProperty({ example: 'pepito@gmail.com', description: 'Email del jugador', required: true })
+  email: string
+  
+  @ApiProperty({ example: '["ADMIN", "PLAYER"]', description: 'Roles que puede tener el jugador' })
+  roles: ['PLAYER']
 }

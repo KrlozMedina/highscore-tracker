@@ -6,7 +6,7 @@ import { combineReducers } from "@reduxjs/toolkit";
 import persistReducer from "redux-persist/es/persistReducer";
 import { usersApi } from "./services/users.api";
 import { scoresApi } from "./services/scores.api";
-import counterReducer from './slices/counter.slices';
+import tokenReducer from './slices/token.slices';
 import {
     FLUSH,
     REHYDRATE,
@@ -19,12 +19,12 @@ import {
 const persistConfig = {
     key: 'root',
     storage: storage,
-    whitelist: ['counterState'],
-    timeout: 100
+    whitelist: ['tokenState'],
+    timeout: 10
 }
 
 const rootReducer = combineReducers({
-    counterState: counterReducer,
+    tokenState: tokenReducer,
     [usersApi.reducerPath]: usersApi.reducer,
     [scoresApi.reducerPath]: scoresApi.reducer
 })
