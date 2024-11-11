@@ -13,6 +13,9 @@ export class ScoreController {
     @Get('leaderboard')
     @ApiOperation({summary: 'Get better scores'})
     @ApiResponse({status: 200, description: 'Global scores uploaded successfully'})
+    @ApiResponse({status: 400, description: 'Invalid data'})
+    @ApiResponse({status: 401, description: 'Unauthorized'})
+    @ApiResponse({status: 403, description: 'Valid token, no permission for this action'})
     async getScores(@Query() paginationQuery: PaginationQueryDto) {
         return this.scoreService.getBetterScores(paginationQuery);
     }
@@ -25,8 +28,11 @@ export class ScoreController {
     }
 
     @Post()
-    @ApiOperation({ summary: 'Create score' })
+    @ApiOperation({ summary: 'Create new score' })
     @ApiResponse({ status: 201, description: 'Create score', type: Scores})
+    @ApiResponse({status: 400, description: 'Invalid data'})
+    @ApiResponse({status: 401, description: 'Unauthorized'})
+    @ApiResponse({status: 403, description: 'Valid token, no permission for this action'})
     async createScore(@Body() createScoreDto: CreateScoreDto) {
         return this.scoreService.createScore(createScoreDto);
     }

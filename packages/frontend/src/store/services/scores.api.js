@@ -14,7 +14,7 @@ export const scoresApi = createApi({
         }),
         createScore: builder.mutation({
             query: (body) => ({
-                url: `scores/${body.id}`,
+                url: `scores`,
                 method: 'POST',
                 body,
             })
