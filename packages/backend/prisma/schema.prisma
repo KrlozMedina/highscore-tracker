@@ -13,15 +13,27 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum Status {
+  ACTIVE
+  INACTIVE
+  BLOCKED
+}
+
 model User {
   userId    String   @id @default(uuid())
+  email     String   @unique
   name      String?
   username  String
   password  String
-  email     String    @unique
-  avatar    String
-  roles     String
-  status    String
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @default(now())
+  roles     Role[]   @relation("UserRoles")
+  status    Status   @default(ACTIVE)
+  avatar    String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Role {
+  id    String @id @default(uuid())
+  name  String @unique
+  users User[] @relation("UserRoles")
 }

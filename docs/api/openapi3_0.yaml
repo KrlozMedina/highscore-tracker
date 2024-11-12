@@ -99,7 +99,7 @@ paths:
                   format: password
                   example: 114c884d2a1cd1cde577ff109c3db5c6
       responses: 
-        '200':
+        '201':
           description: Login successful
           content: 
             application/json:
