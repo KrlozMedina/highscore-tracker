@@ -8,6 +8,7 @@ import { PaginatorDto } from './dto/paginator.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { Scores } from './scores.schema';
 import { Model } from 'mongoose';
+import { GameDto } from './dto/game.dto';
 
 export interface Score {
     id: string;
@@ -33,32 +34,6 @@ export class ScoresService {
     //     }
     // }
 
-    async getScoresByAdmin(paginationQuery: PaginationQueryDto) {
-        const scores = await this.scoresModel
-        .find()
-        .select({_id: 0, scoreId: 1, userId: 1,game: 1, score: 1})
-        .exec();
-
-        const { limit = 10, page = 1 } = paginationQuery;
-        const start = (page - 1) * limit;
-        const end = Number(start) + Number(limit);
-    
-        const data = scores.slice(start, end);
-        const total = scores.length;
-        const totalPages = Math.ceil(total / limit);
-
-        if (!scores) {
-            throw new NotFoundException('Score not found');
-        }
-
-        return <PaginatorDto> {
-            data,
-            total,
-            page,
-            limit,
-            totalPages,
-        }  
-    }
 
     async createScore(createScoreDto: CreateScoreDto) {
         const score = new this.scoresModel(createScoreDto);
@@ -119,18 +94,23 @@ export class ScoresService {
         }
     }
 
-    getBestScores(): Score[]  {
-        return this.scores;
-    }
+    async getBetterScores(paginationQuery: PaginationQueryDto) {
+        const scores = await this.scoresModel
+        .find()
+        .select({_id: 0, scoreId: 1, userId: 1,game: 1, score: 1})
+        .exec();
 
-    getAllScores(paginationQuery: PaginationQueryDto): PaginatorDto {
         const { limit = 10, page = 1 } = paginationQuery;
         const start = (page - 1) * limit;
         const end = Number(start) + Number(limit);
     
-        const data = this.scores.slice(start, end);
-        const total = this.scores.length;
+        const data = scores.slice(start, end);
+        const total = scores.length;
         const totalPages = Math.ceil(total / limit);
+
+        if (!scores) {
+            throw new NotFoundException('Score not found');
+        }
 
         return <PaginatorDto> {
             data,
@@ -138,10 +118,32 @@ export class ScoresService {
             page,
             limit,
             totalPages,
-        }   
+        }  
     }
 
     getAllScoresByUserId(id: string): Score {
         return this.scores.find(score => score.id == id);
+    }
+
+    async getBestScores(game: GameDto){
+        const pipeline = [
+            {$match: {game}},
+            {
+                $group: {
+                    _id: '$userId',
+                    bestScore: {$max: "$score"}
+                }
+            },
+            {
+                $project: {_id: 1, game: game, bestScore: 1}
+            },
+            {
+                $sort: {bestScore: -1 as -1}
+            },
+            {
+                $limit: 10
+            }
+        ];  
+        return await this.scoresModel.aggregate(pipeline).exec();
     }
 }
