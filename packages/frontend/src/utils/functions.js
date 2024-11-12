@@ -1,6 +1,4 @@
 import { clearToken, selectToken } from "hst/store/slices/token.slices";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 
 function parseJwt(token) {
@@ -22,6 +20,7 @@ function validateExpireToken(token, dispatch) {
 
     if (!tokenExpiration || Date.now() > tokenExpiration) {
       dispatch(clearToken());
+      update(token);
       goToLogin();
     }
   } else {
@@ -33,7 +32,8 @@ const goToLogin = () => {
   window.location.href = "/auth/login";
 }
 
-const logOutSession = (dispatch) => {
+const logOutSession = (dispatch, update, token) => {
+  update(token);
   dispatch(clearToken());
   goToLogin();
 }

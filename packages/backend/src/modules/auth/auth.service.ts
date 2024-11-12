@@ -21,15 +21,9 @@ export class AuthService {
     this.redisClient.connect();
   }
 
-  // async validateUser(email: string, password: string) {
-  //   const user = await this.userService.validateUser(email, password);
-
-  //   return user;
-
-  //   // if (user) {
-  //   //   return user;
-  //   // }
-  //   // return null;
+  // async validateToken(token: string): Promise<boolean> {
+  //   const result = await this.redisClient.get(token);
+  //   return result === 'active';
   // }
 
   async login(user: LoginUserDto): Promise<object> {
@@ -51,11 +45,6 @@ export class AuthService {
   }
 
   async logout(token: string) {
-    await this.redisClient.del(token);
-  }
-
-  async validateToken(token: string): Promise<boolean> {
-    const result = await this.redisClient.get(token);
-    return result === 'active';
+    await this.redisClient.del(token.split(' ')[1]);
   }
 }

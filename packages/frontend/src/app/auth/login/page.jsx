@@ -1,12 +1,12 @@
 "use client";
 
 import React, { useState } from 'react';
-import { useLoginUserMutation } from 'hst/store/services/users.api';
 import SocialLoginButtons from 'hst/components/molecules/SocialLoginButtons';
 import InputField from 'hst/components/atoms/InputField';
 import { Button } from 'react-bootstrap';
 import { setToken } from 'hst/store/slices/token.slices';
 import { useDispatch } from 'react-redux';
+import { useLoginUserMutation } from 'hst/store/services/users.api';
 
 const LoginPage = () => {
   const [createUser, { isUpdating }] = useLoginUserMutation();

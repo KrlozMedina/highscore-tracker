@@ -3,10 +3,12 @@
 import Loading from "hst/components/atoms/Loading";
 import { Danger, Warning } from "hst/components/atoms/Message";
 import { useGetUserQuery } from "hst/store/services/users.api";
+import { getToken } from "hst/utils/functions";
 import { Container, Card, Button, Form, Image, Spinner } from "react-bootstrap";
 
 export default function UserByAdmin({params}){
-  const { data, error, isLoading } = useGetUserQuery(params.userId);
+  const token = getToken()
+  const { data, error, isLoading } = useGetUserQuery([params.userId, token]);
 
   return (
     <div>

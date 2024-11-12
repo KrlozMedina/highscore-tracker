@@ -82,14 +82,14 @@ export default function PlayersList() {
                       <Button
                         variant={user.status === 'ACTIVE' ? "warning" : "success"}
                         href="/users/admin"
-                        onClick={() => enableUser(user.userId)}>
+                        onClick={() => enableUser([user.userId, token])}>
                         {user.status === 'ACTIVE' ? "Desactivar" : "Activar"}
                       </Button>
                       {user.status !== 'INACTIVE' &&
                         <Button
                           href="/users/admin"
                           variant="danger"
-                          onClick={() => lockUser(user.userId)}>
+                          onClick={() => lockUser([user.userId, token])}>
                           Eliminar
                         </Button>}
                     </td>

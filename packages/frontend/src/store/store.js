@@ -15,6 +15,7 @@ import {
     PURGE,
     REGISTER,
 } from 'redux-persist';
+import { authApi } from "./services/auth.api";
 
 const persistConfig = {
     key: 'root',
@@ -26,7 +27,8 @@ const persistConfig = {
 const rootReducer = combineReducers({
     tokenState: tokenReducer,
     [usersApi.reducerPath]: usersApi.reducer,
-    [scoresApi.reducerPath]: scoresApi.reducer
+    [scoresApi.reducerPath]: scoresApi.reducer,
+    [authApi.reducerPath]: authApi.reducer
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
@@ -39,7 +41,7 @@ export const store = configureStore({
                 ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
             },
         })
-        .concat([usersApi.middleware], [scoresApi.middleware], [thunk])
+        .concat([usersApi.middleware], [scoresApi.middleware], [thunk], [authApi.middleware])
 });
 
 setupListeners(store.dispatch)

@@ -16,6 +16,22 @@ export interface User {
 export class AuthController {
   constructor(private readonly authService: AuthService, private readonly userService: UsersService) {}
 
+  // @Get('token-validate')
+  // @ApiBearerAuth()
+  // @ApiOperation({ summary: 'Validar token' })
+  // @ApiResponse({
+  //   status: HttpStatus.CREATED,
+  //   description: 'Validar token de usuario',
+  // })
+  // @ApiResponse({
+  //   status: HttpStatus.BAD_REQUEST,
+  //   description: 'data equivocada',
+  // })
+  // validateToken(@Req() req: Request) {
+  //   const [type, token] = req.headers?.authorization?.split(' ') ?? [];
+  //   return this.authService.validateToken(token);
+  // }
+
   @Post('login')
   @ApiOperation({ summary: 'Login user', description: 'Auth user with username, and password', operationId: 'login' })
   @ApiResponse({ status: HttpStatus.CREATED, description: 'Login successful' })
@@ -34,25 +50,13 @@ export class AuthController {
     return this.userService.createUser(createUser);
   }
 
-
-
-  
-
-  
-
-  @Get('token-validate')
+  @Post('logout')
   @ApiBearerAuth()
-  @ApiOperation({ summary: 'Validar token' })
-  @ApiResponse({
-    status: HttpStatus.CREATED,
-    description: 'Validar token de usuario',
-  })
-  @ApiResponse({
-    status: HttpStatus.BAD_REQUEST,
-    description: 'data equivocada',
-  })
-  validateToken(@Req() req: Request) {
-    const [type, token] = req.headers?.authorization?.split(' ') ?? [];
-    return this.authService.validateToken(token);
+  @ApiOperation({ summary: 'Eliminar token' })
+  @ApiResponse({ status: HttpStatus.NO_CONTENT, description: 'Eliminar token de usuario' })
+  @ApiResponse({ status: HttpStatus.BAD_REQUEST, description: 'Data equivocada' })
+  logout(@Req() req: Request) {
+    const token = req.headers?.authorization;
+    return this.authService.logout(token);
   }
 }

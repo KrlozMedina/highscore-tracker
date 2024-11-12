@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { logOutSession } from "hst/utils/functions";
 
 export const usersApi = createApi({
   reducerPath: "userAPI",
@@ -16,7 +17,60 @@ export const usersApi = createApi({
       }),
     }),
     getUser: builder.query({
-      query: (userId) => `users/profile/${userId}`,
+      query: ([userId, token]) => ({
+        url: `users/profile/${userId}`,
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+    }),
+    updateUser: builder.mutation({
+      query: ([userId, body, token]) => ({
+        url: `users/profile/${userId}`,
+        method: "PUT",
+        body,
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }),
+    }),
+    updateAvatarUser: builder.mutation({
+      query: ([userId, formData, token]) => ({
+        url: `users/profile/${userId}/updateAvatar`,
+        method: 'PUT',
+        body: formData,
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+    }),
+    enableUser: builder.mutation({
+      query: ([userId, token]) => ({
+        url: `users/admin/${userId}`,
+        method: "PATCH",
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }),
+    }),
+    lockUser: builder.mutation({
+      query: ([userId, token]) => ({
+        url: `users/admin/${userId}`,
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }),
+    }),
+    logoutUser: builder.mutation({
+      query: (token) => ({
+        url: 'auth/logout',
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${token}`
+        },
+      })
     }),
     loginUser: builder.mutation({
       query: (body) => ({
@@ -32,43 +86,8 @@ export const usersApi = createApi({
         body,
       }),
     }),
-    updateUser: builder.mutation({
-      query: ([userId, body]) => ({
-        url: `users/profile/${userId}`,
-        method: "PUT",
-        // headers: {
-        //   'Content-Type': 'multipart/form-data'
-        // },
-        body
-      }),
-    }),
-    updateAvatarUser: builder.mutation({
-      query: ([userId, formData]) => ({
-        url: `users/profile/${userId}/updateAvatar`,
-        method: 'PUT',
-        body: formData
-      })
-    }),
-
-
-
-    
-    enableUser: builder.mutation({
-      query: (userId) => ({
-        url: `users/admin/${userId}`,
-        method: "PATCH",
-      }),
-    }),
-    lockUser: builder.mutation({
-      query: (userId) => ({
-        url: `users/admin/${userId}`,
-        method: "DELETE",
-      }),
-    }),
-    
-    }),
-  });
-// });
+  }),
+});
 
 export const {
   useLoginUserMutation,
@@ -78,5 +97,6 @@ export const {
   useEnableUserMutation,
   useLockUserMutation,
   useUpdateUserMutation,
-  useUpdateAvatarUserMutation
+  useUpdateAvatarUserMutation,
+  useLogoutUserMutation
 } = usersApi;

@@ -11,7 +11,12 @@ import { Container, Card, Button, Form } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 
 export default function UserDetail({ params }) {
-  const { data, error, isLoading } = useGetUserQuery(params.userId);
+  const token = getToken()
+  const tokenJwt = parseJwt(token);
+  const userRoles = tokenJwt?.roles;
+  const userId = tokenJwt?.sub;
+
+  const { data, error, isLoading } = useGetUserQuery([params.userId, token]);
   const [updateUser, { isLoading: isUpdating }] = useUpdateUserMutation();
   const [updateAvatar, { isLoading: isUpdatingAvatar }] = useUpdateAvatarUserMutation();
 
@@ -24,9 +29,7 @@ export default function UserDetail({ params }) {
   const [roles, setRoles] = useState([]);
   const [avatarOld, setAvatarOld] = useState('');
 
-  const tokenJwt = parseJwt(getToken());
-  const userRoles = tokenJwt?.roles;
-  const userId = tokenJwt?.sub;
+  
 
   const dispatch = useDispatch();
 
@@ -41,7 +44,7 @@ export default function UserDetail({ params }) {
       setUsername(data.username);
       setEmail(data.email);
       setRoles(data.roles);
-      setAvatarImage(`data:image/png;base64,${data.avatar}`);
+      setAvatarImage(`data:image/png;base64,${data.avatarImage}`);
     }
   }, [data, isLoading]);
 
@@ -62,7 +65,7 @@ export default function UserDetail({ params }) {
 
     console.log(formData.get('file'))
 
-    updateAvatar([params.userId, formData]);
+    updateAvatar([params.userId, formData, token]);
   };
 
   const handleSave = async () => {
@@ -74,7 +77,7 @@ export default function UserDetail({ params }) {
     // formData.append('username', username);
 
     try {
-      await updateUser([params.userId, {name, email, username, roles}]);
+      await updateUser([params.userId, {name, email, username, roles}, token]);
       setIsEditing(false);
     } catch (err) {
       console.error("Error al actualizar el usuario:", err);

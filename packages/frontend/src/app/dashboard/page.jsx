@@ -6,14 +6,17 @@ import { useDispatch } from 'react-redux';
 import { validateExpireToken, getToken, parseJwt, logOutSession } from 'hst/utils/functions';
 import Header from 'hst/components/molecules/Header';
 import Footer from 'hst/components/molecules/Footer';
+import { useLogoutUserMutation } from 'hst/store/services/users.api';
 
 export default function Dashboard() {
   const dispatch = useDispatch();
-  const tokenJwt = parseJwt(getToken());
+  const token = getToken();
+  const tokenJwt = parseJwt(token);
   const userRoles = tokenJwt?.roles;
   const userId = tokenJwt?.sub
   const isAdmin = userRoles?.includes('ADMIN');
   const isPlayer = userRoles?.includes('PLAYER');
+  const [update] = useLogoutUserMutation()
 
   useEffect(() => {
     validateExpireToken(tokenJwt, dispatch);
@@ -26,7 +29,7 @@ export default function Dashboard() {
         <Container>
           <h1 className="text-center">Bienvenido al Dashboard</h1>
           <div className="text-center mb-4">
-            <Button variant="danger" onClick={() => logOutSession(dispatch)}>
+            <Button variant="danger" onClick={() => logOutSession(dispatch, update, token)}>
               Cerrar Sesión
             </Button>
           </div>
