@@ -8,6 +8,7 @@ import { PaginatorDto } from './dto/paginator.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { Scores } from './scores.schema';
 import { Model } from 'mongoose';
+import { GameDto } from './dto/game.dto';
 
 export interface Score {
     id: string;
@@ -122,5 +123,27 @@ export class ScoresService {
 
     getAllScoresByUserId(id: string): Score {
         return this.scores.find(score => score.id == id);
+    }
+
+    async getBestScores(game: GameDto){
+        const pipeline = [
+            {$match: {game}},
+            {
+                $group: {
+                    _id: '$userId',
+                    bestScore: {$max: "$score"}
+                }
+            },
+            {
+                $project: {_id: 1, game: game, bestScore: 1}
+            },
+            {
+                $sort: {bestScore: -1 as -1}
+            },
+            {
+                $limit: 10
+            }
+        ];  
+        return await this.scoresModel.aggregate(pipeline).exec();
     }
 }

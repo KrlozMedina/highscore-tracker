@@ -4,6 +4,7 @@ import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto';
 import { CreateScoreDto, UpdateScoresDto } from './dto/create-score.dto';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Scores } from './scores.schema';
+import { GameDto } from './dto/game.dto';
 
 @ApiTags('Scores')
 @Controller('scores')
@@ -51,6 +52,17 @@ export class ScoreController {
     @ApiResponse({status: 204, description: 'Delete Score by ScoreId'} )
     async deleteScore(@Param('scoreId') scoreId: string) {
         return this.scoreService.deleteScore(scoreId);
+    }
+
+    
+    @Get('bestscores')
+    @ApiOperation({summary: 'The best scores', description: 'List of the best scores'})
+    @ApiResponse({status: 200, description: 'The best scores uploaded successfully'})
+    @ApiResponse({status: 400, description: 'Invalid data'})
+    @ApiResponse({status: 401, description: 'Unauthorized'})
+    @ApiResponse({status: 403, description: 'Valid token, no permission for this action'})
+    async getBestScores(@Query() game: GameDto){
+        return this.scoreService.getBestScores(game);
     }
 }
 

@@ -27,8 +27,12 @@ export const scoresApi = createApi({
         }),
         getAllScores: builder.query({
             query: (pag) => `scores?page=${pag.page}&limit=${pag.limit}`
+        }),
+        getBestScores: builder.query({
+            query: (game) => `scores/bestscores?game=${game}`,
         })
     })
 })
 
-export const {useGetAllScoresQuery, useGetScoreByIdQuery, useGetLeaderBoardQuery, useCreateScoreMutation, useDeleteScoreMutation} = scoresApi;
+export const {useGetAllScoresQuery, useGetScoreByIdQuery, useGetLeaderBoardQuery, 
+    useCreateScoreMutation, useDeleteScoreMutation, useGetBestScoresQuery} = scoresApi;
