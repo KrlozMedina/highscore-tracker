@@ -7,6 +7,7 @@ import {useState} from 'react';
 
 const RegisterScore = (params) => {
     const [score, setScore] = useState(0);
+    const [game, setGame] = useState('');
     const [createScore, { isUpdating }] = useCreateScoreMutation();
 
     const handleSubmit = (e) => {
@@ -21,9 +22,16 @@ const RegisterScore = (params) => {
         <div className="container mt-5 max-width">
           <h2>Registro de puntuación</h2>
           <form onSubmit={handleSubmit}>
-          <InputField
-              label="Puntuación"
+            <InputField
+              label="Juego"
               type="text"
+              value={game}
+              onChange={(e) => setGame(e.target.value)}
+              placeholder="Ingresa juego"
+            />
+            <InputField
+              label="Puntuación"
+              type="number"
               value={score}
               onChange={(e) => setScore(e.target.value)}
               placeholder="Ingresa puntuación"
