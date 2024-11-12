@@ -1,21 +1,21 @@
 import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateUserDto {
-    @ApiProperty({name: 'Pepito Perez'})
-    name: string;
+  @ApiProperty({ example: 'pepito@gmail.com', description: 'Email del jugador', required: true })
+  email: string
+  
+  @ApiProperty({ example: 'Pepito Perez', description: 'Nombre del jugador' })
+  name?: string | null
 
-    @ApiProperty({name: 'Peperez'})
-    username: string;
-
-    @ApiProperty({name: 'Email'})
-    email: string;
-    
-    @ApiProperty({name: 'abc1234yz'})
-    password: string;
-
-    @ApiProperty({name: 'player'})
-    role: string
-
-    @ApiProperty({name: 'http://image.com'})
-    avatar: string;
+  @ApiProperty({ example: 'PePerez', description: 'Usuario del jugador' })
+  username?: string | null
+  
+  @ApiProperty({ example: 'hash(password)', description: 'password del jugador' })
+  password: string
+  
+  @ApiProperty({ example: 'Url o nombre del archivo', description: 'Imagen del jugador' })
+  avatar?: string | null
+  
+  @ApiProperty({ example: '["ADMIN", "PLAYER"]', description: 'Roles que puede tener el jugador' })
+  roles: ['PLAYER']
 }

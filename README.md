@@ -288,36 +288,68 @@ El frontend se comunica con el backend a través de las API mencionadas anterior
 
 ## Diagrama de la Base de Datos
 
-### MongoDB (Scores)
+### MongoDB
 
-| Campo      | Tipo      | Descripción                       |
-|------------|-----------|-----------------------------------|
-| scoreId    | UUID      | Identificador único de la puntuación |
-| userId     | UUID      | Referencia al usuario que obtuvo la puntuación |
-| game       | String    | Nombre del juego                  |
-| score      | Number    | Valor de la puntuación obtenida   |
-| createdAt  | DateTime  | Fecha de creación de la puntuación |
-| updatedAt  | DateTime  | Última actualización de la puntuación |
+#### Tabla `users`
+
+La tabla `scores` almacena las puntuaciones obtenidas por los usuarios en los juegos.
+
+| Columna       | Tipo de Dato | Descripción                                      |
+|---------------|--------------|--------------------------------------------------|
+| `scoreId`     | UUID         | Identificador único de la puntuación (Primary Key).|
+| `userId`      | UUID         | ID del usuario que obtuvo la puntuación (FK a `users.userId`).|
+| `game`        | VARCHAR      | Nombre del juego en el que se obtuvo la puntuación.|
+| `score`       | INT          | Puntuación obtenida por el usuario.              |
+| `createdAt`   | TIMESTAMP    | Fecha y hora de creación del registro de puntuación.|
+| `updatedAt`   | TIMESTAMP    | Fecha y hora de la última actualización de la puntuación.|
 
 ### PostgreSQL (Usuarios)
 
-| Campo       | Tipo       | Descripción                         |
-|-------------|------------|-------------------------------------|
-| userId      | UUID       | Identificador único de usuario      |
-| name        | String     | Nombre de usuario                   |
-| username    | String     | Nickname de usuario                 |
-| email       | String     | Correo electrónico                  |
-| password    | String     | Contraseña (almacenada de manera segura) |
-| role        | String     | Rol del usuario (jugador, administrador) |
-| status      | String    | Estado activo/inactivo del usuario |
-| avatar      | String     | URL del avatar del usuario         |
-| createdAt   | DateTime       | Fecha de creación del usuario      |
-| updatedAt   | DateTime       | Última actualización del usuario   |
+#### Tabla `users`
+La tabla `users` almacena información relacionada con los usuarios del sistema.
+
+| Columna       | Tipo de Dato | Descripción                                      |
+|---------------|--------------|--------------------------------------------------|
+| `userId`      | UUID         | Identificador único del usuario (Primary Key).   |
+| `username`    | VARCHAR      | Nombre de usuario único.                        |
+| `name`        | VARCHAR      | Nombre completo del usuario.                     |
+| `email`       | VARCHAR      | Correo electrónico del usuario.                  |
+| `password`    | VARCHAR      | Contraseña del usuario (encriptada).             |
+| `avatar`      | VARCHAR      | URL del avatar del usuario.                      |
+| `status`      | VARCHAR      | Estado del usuario (activo, inactivo, suspendido).|
+| `role`        | UUID         | ID del rol asociado con el usuario (FK).         |
+| `createdAt`   | TIMESTAMP    | Fecha y hora de creación del usuario.            |
+| `updatedAt`   | TIMESTAMP    | Fecha y hora de la última actualización.         |
+
+#### Tabla `roles`
+La tabla `roles` define los roles disponibles para los usuarios en el sistema.
+
+| Columna       | Tipo de Dato | Descripción                                      |
+|---------------|--------------|--------------------------------------------------|
+| `roleId`      | UUID         | Identificador único del rol (Primary Key).       |
+| `name`        | VARCHAR      | Nombre del rol (Ej. "Admin", "User", "Guest").   |
+
+#### Tabla `_UserRoles`
+La tabla `_UserRoles` es una tabla intermedia que gestiona la relación muchos a muchos entre los usuarios y los roles. Un usuario puede tener múltiples roles.
+
+| Columna       | Tipo de Dato | Descripción                                      |
+|---------------|--------------|--------------------------------------------------|
+| `B`           | UUID         | ID del usuario (Foreign Key a `users.userId`).   |
+| `A`           | UUID         | ID del rol (Foreign Key a `roles.roleId`).       |
+
+#### Relaciones entre Tablas
+
+1. **Relación entre `users` y `roles`**:
+    - Un usuario puede tener múltiples roles, lo que se gestiona a través de la tabla intermedia `_UserRoles`.
+    - La relación es muchos a muchos, ya que un rol puede ser asignado a múltiples usuarios.
+
+2. **Relación entre `users` y `scores`**:
+    - Un usuario puede registrar múltiples puntuaciones, por lo que la relación es de uno a muchos entre `users` y `scores`.
+    - Cada puntuación está asociada con un usuario específico.
 
 ### Redis (Sesiones)
-<font color='gray'> 
+
 Redis se utiliza para la gestión de sesiones, almacenando información temporal de autenticación y control de sesiones activas para una experiencia de usuario sin interrupciones.
-</font>
 
 ### Relación entre Base de Datos
 
@@ -427,7 +459,7 @@ Para iniciar y trabajar en los diferentes workspaces, asegúrate de tener las he
         ```
 
         ```bash
-        db = db.getSiblingDB('bootcamp')
+        db = db.getSiblingDB('highscore-tracker_db')
         ```
 
         ```bash
@@ -436,7 +468,7 @@ Para iniciar y trabajar en los diferentes workspaces, asegúrate de tener las he
             pwd: 'bootcamppass',
             roles: [{
                 role: 'dbOwner',
-                db: 'bootcamp'
+                db: 'highscore-tracker_db'
             }]})
         ```
 
@@ -447,7 +479,7 @@ Para iniciar y trabajar en los diferentes workspaces, asegúrate de tener las he
         Crear el archivo `.env` para guardar las variables de entorno
 
         ```env
-        MONGODB_URI=mongodb://bootcampuser:bootcamppass@localhost:27017/bootcamp
+        MONGODB_URI=mongodb://bootcampuser:bootcamppass@localhost:27017/highscore-tracker_db
         ```
 
     3. **Importar Datos a MongoDB**
