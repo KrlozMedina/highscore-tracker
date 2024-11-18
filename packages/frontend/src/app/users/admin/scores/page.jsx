@@ -53,7 +53,7 @@ const page = () => {
       <Container className="mt-5">
         <h2 className="mb-4">Puntuaciones de Todos los Jugadores</h2>
         {
-          errorScore !== undefined ? <Danger error={error} /> :
+          errorScore !== undefined ? <Danger error={errorScore} /> :
             isLoadingScore ? <Loading message='Cargando usuarios' /> :
               dataScore.total === 0 ? <Warning message='No hay puntajes para mostrar.' /> :
                 <div>

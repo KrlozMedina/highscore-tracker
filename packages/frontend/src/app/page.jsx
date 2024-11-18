@@ -17,11 +17,11 @@ const IndexPage = () => {
       </p>
 
       <div className="my-4">
-        <NavLink href="/auth/login" passHref>
-          <a className="btn btn-primary btn-lg mx-2">Iniciar Sesión</a>
+        <NavLink href="/auth/login">
+          <button className="btn btn-primary btn-lg mx-2">Iniciar Sesión</button>
         </NavLink>
-        <NavLink href="/auth/register" passHref>
-          <a className="btn btn-outline-primary btn-lg mx-2">Registrarse</a>
+        <NavLink href="/auth/register">
+          <button className="btn btn-outline-primary btn-lg mx-2">Registrarse</button>
         </NavLink>
       </div>
 

@@ -281,6 +281,13 @@ export class UsersService {
   }
 
   async updateAvatarUser(userId: string, file: any, data: any) {
+    try {
+      const filePath = join(__dirname, '../../../../../../dist/uploads', data.data);
+      fs.unlinkSync(filePath)
+    } catch (error) {
+      console.log(error)
+    }
+
     const user = await this.prismaService.user.update({
       where: { userId },
       data: { avatar: file.filename },

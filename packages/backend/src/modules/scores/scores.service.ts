@@ -34,8 +34,35 @@ export class ScoresService {
     //     }
     // }
 
+    async getScores(paginationQuery: PaginationQueryDto) {
+        const scores = await this.scoresModel
+        .find()
+        .select({_id: 0, scoreId: 1, userId: 1,game: 1, score: 1})
+        .exec();
+
+        const { limit = 10, page = 1 } = paginationQuery;
+        const start = (page - 1) * limit;
+        const end = Number(start) + Number(limit);
+    
+        const data = scores.slice(start, end);
+        const total = scores.length;
+        const totalPages = Math.ceil(total / limit);
+
+        if (!scores) {
+            throw new NotFoundException('Score not found');
+        }
+
+        return <PaginatorDto> {
+            data,
+            total,
+            page,
+            limit,
+            totalPages,
+        }  
+    }
 
     async createScore(createScoreDto: CreateScoreDto) {
+        console.log(createScoreDto)
         const score = new this.scoresModel(createScoreDto);
         return score.save();
     }
@@ -127,7 +154,7 @@ export class ScoresService {
 
     async getBestScores(game: GameDto){
         const pipeline = [
-            {$match: {game}},
+            {$match: game},
             {
                 $group: {
                     _id: '$userId',

@@ -1,4 +1,4 @@
-import HomeTemplate from 'hst/components/templates/HomeTemplate';
+import HomeTemplate from 'hst/components/templates/MainTemplate';
 
 const HomePage = () => {
   return (

@@ -11,6 +11,16 @@ import { GameDto } from './dto/game.dto';
 export class ScoreController {
     constructor(private scoreService: ScoresService){}
 
+    @Get()
+    @ApiOperation({summary: 'Get all scores'})
+    @ApiResponse({status: 200, description: 'Global scores uploaded successfully'})
+    @ApiResponse({status: 400, description: 'Invalid data'})
+    @ApiResponse({status: 401, description: 'Unauthorized'})
+    @ApiResponse({status: 403, description: 'Valid token, no permission for this action'})
+    async getAllScores(@Query() paginationQuery: PaginationQueryDto) {
+        return this.scoreService.getBetterScores(paginationQuery);
+    }
+
     @Get('leaderboard')
     @ApiOperation({summary: 'Get better scores'})
     @ApiResponse({status: 200, description: 'Global scores uploaded successfully'})
@@ -19,6 +29,18 @@ export class ScoreController {
     @ApiResponse({status: 403, description: 'Valid token, no permission for this action'})
     async getScores(@Query() paginationQuery: PaginationQueryDto) {
         return this.scoreService.getBetterScores(paginationQuery);
+    }
+
+    @Get('bestscores')
+    @ApiOperation({summary: 'The best scores', description: 'List of the best scores'})
+    @ApiResponse({status: 200, description: 'The best scores uploaded successfully'})
+    @ApiResponse({status: 400, description: 'Invalid data'})
+    @ApiResponse({status: 401, description: 'Unauthorized'})
+    @ApiResponse({status: 403, description: 'Valid token, no permission for this action'})
+    async getBestScores(@Query() game: GameDto){
+        console.log(game)
+        // console.log(await this.scoreService.getBestScores(game));
+        return this.scoreService.getBestScores(game);
     }
 
     @Get(':scoreId')
@@ -52,17 +74,6 @@ export class ScoreController {
     @ApiResponse({status: 204, description: 'Delete Score by ScoreId'} )
     async deleteScore(@Param('scoreId') scoreId: string) {
         return this.scoreService.deleteScore(scoreId);
-    }
-
-    
-    @Get('bestscores')
-    @ApiOperation({summary: 'The best scores', description: 'List of the best scores'})
-    @ApiResponse({status: 200, description: 'The best scores uploaded successfully'})
-    @ApiResponse({status: 400, description: 'Invalid data'})
-    @ApiResponse({status: 401, description: 'Unauthorized'})
-    @ApiResponse({status: 403, description: 'Valid token, no permission for this action'})
-    async getBestScores(@Query() game: GameDto){
-        return this.scoreService.getBestScores(game);
     }
 }
 

@@ -7,6 +7,7 @@ import { validateExpireToken, getToken, parseJwt, logOutSession } from 'hst/util
 import Header from 'hst/components/molecules/Header';
 import Footer from 'hst/components/molecules/Footer';
 import { useLogoutUserMutation } from 'hst/store/services/users.api';
+import MainTemplate from 'hst/components/templates/MainTemplate';
 
 export default function Dashboard() {
   const dispatch = useDispatch();
@@ -24,20 +25,20 @@ export default function Dashboard() {
 
   return (
     <>
-      <Header roles={userRoles} userId={userId} />
-      <main className="my-5">
-        <Container>
-          <h1 className="text-center">Bienvenido al Dashboard</h1>
-          <div className="text-center mb-4">
-            <Button variant="danger" onClick={() => logOutSession(dispatch, update, token)}>
-              Cerrar Sesión
-            </Button>
-          </div>
-          {isAdmin && <AdminDashboard />}
-          {isPlayer && <PlayerDashboard userId={userId} />}
-        </Container>
-      </main>
-      <Footer />
+      <MainTemplate>
+        <main className="my-5">
+          <Container>
+            <h1 className="text-center">Bienvenido al Dashboard</h1>
+            <div className="text-center mb-4">
+              <Button variant="danger" onClick={() => logOutSession(dispatch, update, token)}>
+                Cerrar Sesión
+              </Button>
+            </div>
+            {isAdmin && <AdminDashboard />}
+            {isPlayer && <PlayerDashboard userId={userId} />}
+          </Container>
+        </main>
+      </MainTemplate>
     </>
   );
 }

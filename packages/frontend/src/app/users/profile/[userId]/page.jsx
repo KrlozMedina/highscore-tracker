@@ -62,6 +62,7 @@ export default function UserDetail({ params }) {
 
     const formData = new FormData();
     formData.append('file', file);
+    formData.append('data', data.avatar);
 
     console.log(formData.get('file'))
 

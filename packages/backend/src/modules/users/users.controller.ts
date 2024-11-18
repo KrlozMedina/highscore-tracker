@@ -110,6 +110,7 @@ export class UsersController {
     @UploadedFile() file: Express.Multer.File,
     @Req() request: Request
   ) {
+    // console.log(request.body)
     return this.usersService.updateAvatarUser(userId, file, request.body);
   }
 
@@ -145,6 +146,12 @@ export class UsersController {
   async lockUser(@Param('userId') userId: string) {
     return this.usersService.lockUser(userId);
   }
+
+  // @Delete(':id')
+  // @HttpCode(204)
+  // deleteUser(@Param('id') id: string): void {
+  //   this.usersService.deleteUser(id);
+  // }
 }
 
 // @Controller('users/profile')
